@@ -1,8 +1,9 @@
 source 'https://rubygems.org'
 
+ruby '2.0.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.1'
+gem 'rails', '4.0.4'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 # Use SCSS for stylesheets
@@ -38,3 +39,13 @@ gem 'capistrano-rails', group: :development
 # Use debugger
 gem 'debugger', group: [:development, :test]
 
+gem 'pg', '~> 0.14.1'
+gem 'devise', '~> 3.2.4'
+gem 'friendly_id', '~> 5.0.3'
+gem 'haml', '~> 4.0.5'
+gem 'haml-rails', '~> 0.5.3', group: [:development]
+gem 'erb2haml', '~> 0.1.5', group: [:development]
+#gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'mailcatcher', group: [:development]
+gem 'bootstrap-sass', '~> 3.1.1'

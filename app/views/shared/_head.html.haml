@@ -1,0 +1,26 @@
+%meta{"name" => "viewport", :content => "initial-scale=1.0", :width => "device-width"}
+%meta{"http-equiv" => "X-UA-Compatible", :content => "IE=edge"}
+%meta{:charset => "utf-8"}
+
+%title= content_for?(:title) ? yield(:title) : "Funny Videos - Discover funny videos suggested to you in real-time"
+
+%meta{:property => "fb:app_id", :content => "1411053429180123"}
+%meta{:property => "og:type", :content => "website"}
+%meta{:property => "og:url", :content => request.url}
+
+- if content_for?(:head)
+  = yield(:head)
+- else
+  %meta{:property => "og:title", :content => "Funny Videos"}
+  %meta{:property => "og:description", :content => "Visit Funny Videos and discover funny videos suggested to you in real-time"}
+  %meta{:property => "og:image", :content => "image_url"}
+
+%link{:rel => "icon", :href => "/assets/favicon.ico", :type => "images/x-icon"}
+%link{rel: "stylesheet", href: "//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css"}
+%link{rel: "stylesheet", href: "//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css"}
+
+= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+
+= csrf_meta_tags
+
+= yield(:custom_javascripts)

@@ -1,0 +1,5 @@
+.row
+  - 20.times do
+    = render "shared/post_pod"
+
+= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook)
