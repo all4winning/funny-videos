@@ -1,0 +1,4 @@
+= bootstrap_form_tag url: posts_videos_path, layout: :horizontal do |f|
+  = f.url_field :youtube_url, value: '', required: "required"
+  = f.form_group do
+    = f.primary

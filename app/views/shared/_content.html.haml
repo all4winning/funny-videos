@@ -1,7 +1,7 @@
-#container.container-fluid
+.container-fluid
+  .alert-container= render 'layouts/messages'
   .row
     .col-xs-12.col-sm-6.col-md-9
-      .alert-container= render 'layouts/messages'
       = content_for?(:content) ? yield(:content) : yield
     .col-xs-6.col-md-3
       = render 'shared/sidebar'

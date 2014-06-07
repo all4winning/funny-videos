@@ -49,3 +49,9 @@ gem 'erb2haml', '~> 0.1.5', group: [:development]
 gem 'omniauth-facebook'
 gem 'mailcatcher', group: [:development]
 gem 'bootstrap-sass', '~> 3.1.1'
+gem 'paperclip', github: 'thoughtbot/paperclip'
+gem 'protected_attributes'
+gem 'open_uri_redirections'
+gem 'font-awesome-rails'
+gem 'youtube_it'
+gem 'bootstrap_form'

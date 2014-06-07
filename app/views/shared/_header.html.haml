@@ -1,4 +1,4 @@
-#container.container-fluid
+.container-fluid
   %nav.navbar.navbar-fixed-top.navbar-static-top.navbar-default{role: "navigation"}
     .container-fluid
       / Brand and toggle get grouped for better mobile display
@@ -13,27 +13,51 @@
       #bs-example-navbar-collapse-1.collapse.navbar-collapse
         %ul.nav.navbar-nav
           %li.active
-            %a{href: "#"} Latest
+            %a{href: "#"} 
+              %i.fa.fa-home.fa-fw
+              Home
           %li
-            %a{href: "#"} Most Popular
+            %a{href: "#"} Popular
+          %li
+            %a{href: "#"} Trending
+              
         %form.navbar-form.navbar-left{role: "search"}
           .form-group
-            %input.form-control{placeholder: "Search", type: "text"}/
-          %button.btn.btn-default{type: "submit"} Submit
+            .input-group.margin-bottom-sm
+              %span.input-group-addon
+                %i.fa.fa-search.fa-fw
+              %input.form-control{type: "text", placeholder: "Search"}
+            %button.btn.btn-default{type: "submit"} Submit
         %ul.nav.navbar-nav.navbar-right
           - if user_signed_in?
-            %li
-              %a{href: root_path} My Account
-            %li
-              = link_to "Logout", destroy_user_session_path, {method: "delete"}
+            .btn-group#upload
+              %a.btn.btn-primary{href: new_posts_video_path}
+                %i.fa.fa-upload.fa-fw
+                Upload
+            .btn-group#my-account
+              %a.btn.btn-primary{href: root_path}
+                %i.fa.fa-user.fa-fw
+                = current_user.username
+              %a.btn.btn-primary.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
+                %span.fa.fa-caret-down
+              %ul.dropdown-menu
+                %li
+                  %a{href: root_path}
+                    %i.fa.fa-pencil.fa-fw
+                    Edit
+                %li
+                  = link_to destroy_user_session_path, {method: "delete"} do
+                    %i.fa.fa-trash-o.fa-fw
+                    Logout
           - else
             %li
-              %a{href: new_user_session_path} Login
-            %li
-              %a{href: new_user_registration_path} Register
+              %a#facebook-connect{ href: user_omniauth_authorize_path(:facebook) }
+                %button.btn.btn-facebook
+                  %i.fa.fa-facebook 
+                    Connect with Facebook
 
-  .jumbotron
-    %h1 Win an iPad mini!
-    %p Upload a funny video and you could win an iPad mini
-    %p
-      %a.btn.btn-primary.btn-lg{role: "button"} Enter the contest NOW!
+  / .jumbotron
+  /   %h1 Win an iPad mini!
+  /   %p Upload a funny video and you could win an iPad mini
+  /   %p
+  /     %a.btn.btn-primary.btn-lg{role: "button"} Enter the contest NOW!

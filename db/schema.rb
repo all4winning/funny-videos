@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140525093506) do
+ActiveRecord::Schema.define(version: 20140607122959) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 20140525093506) do
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
 
   create_table "posts", force: true do |t|
-    t.string   "image"
+    t.string   "image_url"
     t.string   "title"
     t.text     "description"
     t.integer  "user_id"
@@ -52,6 +52,10 @@ ActiveRecord::Schema.define(version: 20140525093506) do
     t.string   "type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   create_table "posts_tags", force: true do |t|
@@ -96,6 +100,10 @@ ActiveRecord::Schema.define(version: 20140525093506) do
     t.datetime "locked_at"
     t.string   "provider"
     t.string   "uid"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree

@@ -1,0 +1,11 @@
+common: &common
+  dev_key: AI39si7Xcn3becCujfw3-LmD5wRfVwrzPOtLbZLpMO9V2ltxCm8LpA-kMmaZoqBRJnXTbmKOcsncjcIyp8XLsDrwHtNQtLm9Uw
+  username:  crisan.v.ciprian@gmail.com
+  password:  PLMzaq123
+
+test:
+  <<: *common
+development:
+  <<: *common
+production:
+  <<: *common
