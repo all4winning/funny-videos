@@ -1,3 +1,5 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
   root "home#index"
   
@@ -8,5 +10,9 @@ Rails.application.routes.draw do
 
   namespace :posts do
     resources :videos, except: [:edit, :update]
+  end
+
+  authenticate :user, lambda { |u| u.admin? } do
+    mount Sidekiq::Web => '/sidekiq'
   end
 end

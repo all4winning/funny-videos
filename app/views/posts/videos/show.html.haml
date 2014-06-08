@@ -1,2 +1,4 @@
 %h2= @video.title
+.video-container
+  %iframe{width: "620", height: "470", frameborder: "0", src: @video.video_url}
 %p= @video.description

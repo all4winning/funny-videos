@@ -1,7 +1,7 @@
 .col-sm-6.col-md-4
   .thumbnail
-    = image_tag "index.svg"
+    = image_tag video.image.url
     .caption
-      %h3 Thumbnail label
+      %h3= video.title
       %p
-        %a.btn.btn-primary{href: "#", role: "button"} Read More
+        %a.btn.btn-primary{href: posts_video_path(video), role: "button"} Read More
