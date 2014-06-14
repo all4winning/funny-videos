@@ -12,7 +12,7 @@ module Posts
                           watermarks:[
                             {
                               path: "#{Rails.root}/public/images/watermark.png",
-                              position: "west"
+                              position: "Center"
                             }
                           ]
                         }

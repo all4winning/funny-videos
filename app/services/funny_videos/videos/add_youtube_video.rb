@@ -18,7 +18,11 @@ module Videos
       @video.description = youtube_video.description unless @video.description.present?
       @video.video_embed_url = youtube_video.embed_url
       @video.video_id = youtube_video.unique_id
-      @video.image = image_url
+      begin
+        @video.image = image_url
+      rescue Exception => e
+        @video.image = fallback_image_url
+      end
       @video.save
     end
 
@@ -27,11 +31,11 @@ module Videos
     end
 
     def image_url
-      begin
-        URI.parse(IMAGE_URL.gsub("video_id", youtube_video.unique_id))
-      rescue Exception => e
-        URI.parse(FALLBACK_IMAGE_URL.gsub("video_id", youtube_video.unique_id))
-      end
+      URI.parse(IMAGE_URL.gsub("video_id", youtube_video.unique_id))
+    end
+
+    def fallback_image_url
+      URI.parse(FALLBACK_IMAGE_URL.gsub("video_id", youtube_video.unique_id))
     end
 
     def youtube_client
