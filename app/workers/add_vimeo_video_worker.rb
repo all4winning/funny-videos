@@ -3,7 +3,7 @@ class AddVimeoVideoWorker
   sidekiq_options queue: "high"
   sidekiq_options retry: false
   
-  def perform(url, user_id)
-    Videos::AddVimeoVideo.new(url, user_id).perform
+  def perform(video_id)
+    Videos::AddVimeoVideo.new(video_id).perform
   end
 end

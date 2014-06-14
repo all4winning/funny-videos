@@ -1,7 +1,6 @@
 .col-sm-6.col-md-4
-  .thumbnail
-    = image_tag video.image.url
-    .caption
-      %h3= video.title
-      %p
-        %a.btn.btn-primary{href: posts_video_path(video), role: "button"} Read More
+  %a{href: posts_video_path(video)}
+    .thumbnail
+      = image_tag video.image.url(:video)
+      .caption
+        %h3= video.title

@@ -1,9 +1,8 @@
 module Videos
   class AddVimeoVideo
 
-    def initialize(url, user_id)
-      @url = url
-      @user_id = user_id
+    def initialize(video_id)
+      @video_id = video_id
     end
 
     def perform

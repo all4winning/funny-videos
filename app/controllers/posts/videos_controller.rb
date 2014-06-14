@@ -15,9 +15,15 @@ module Posts
     end
 
     def create
-      FunnyVideos::Videos::AddVideo.new(params, current_user).perform
-      flash[:notice] = "Your video will be added shortly. You will be notified when ready."
-      redirect_to action: "index"
+      @add_form = FunnyVideos::Videos::AddForm.new(current_user)
+      if @add_form.submit(params)
+        FunnyVideos::Videos::AddVideo.new(@add_form.video).perform
+        flash[:notice] = "Your video will be added shortly. You will be notified when ready."
+        redirect_to action: "index"
+      else
+        flash[:error] = "Correct the errors and try again."
+        redirect_to action: "new"
+      end
     end
 
     def destroy

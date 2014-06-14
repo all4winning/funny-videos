@@ -3,7 +3,7 @@ class AddYoutubeVideoWorker
   sidekiq_options queue: "high"
   sidekiq_options retry: false
   
-  def perform(url, user_id)
-    Videos::AddYoutubeVideo.new(url, user_id).perform
+  def perform(video_id)
+    Videos::AddYoutubeVideo.new(video_id).perform
   end
 end

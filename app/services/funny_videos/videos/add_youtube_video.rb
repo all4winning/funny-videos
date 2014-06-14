@@ -1,9 +1,10 @@
 module Videos
   class AddYoutubeVideo
+    IMAGE_URL = "http://img.youtube.com/vi/video_id/maxresdefault.jpg"
+    FALLBACK_IMAGE_URL = "http://img.youtube.com/vi/video_id/0.jpg"
 
-    def initialize(url, user_id)
-      @url = url
-      @user_id = user_id
+    def initialize(video_id)
+      @video = Posts::Video.find(video_id)
     end
 
     def perform
@@ -13,26 +14,23 @@ module Videos
     private
 
     def add_video
-      youtube_video = youtube_client.video_by(@url)
-      video.title = youtube_video.title
-      video.description = youtube_video.description
-      video.video_url = youtube_video.embed_url
-      video.video_id = youtube_video.unique_id
-      video.user_id = @user_id
-      video.image = image_url(youtube_video.thumbnails.first.url)
-      video.save
+      @video.title = youtube_video.title unless @video.title.present?
+      @video.description = youtube_video.description unless @video.description.present?
+      @video.video_embed_url = youtube_video.embed_url
+      @video.video_id = youtube_video.unique_id
+      @video.image = image_url
+      @video.save
     end
 
-    def video
-      @video ||= Posts::Video.new
+    def youtube_video
+      @youtube_video ||= youtube_client.video_by(@video.video_url)
     end
 
-    def image_url(default_url)
-      require 'open-uri'
-      require 'open_uri_redirections'
-      default_url = default_url.gsub(/default/, '0')
-      open(default_url, :allow_redirections => :safe) do |r|
-        URI.parse(r.base_uri.to_s)
+    def image_url
+      begin
+        URI.parse(IMAGE_URL.gsub("video_id", youtube_video.unique_id))
+      rescue Exception => e
+        URI.parse(FALLBACK_IMAGE_URL.gsub("video_id", youtube_video.unique_id))
       end
     end
 

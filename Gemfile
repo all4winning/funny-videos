@@ -21,6 +21,7 @@ gem 'open_uri_redirections'
 gem 'font-awesome-rails'
 gem 'youtube_it'
 gem 'bootstrap_form'
+gem 'simple_form'
 gem 'sidekiq'
 gem 'sinatra', require: false
 gem 'slim'

@@ -22,12 +22,11 @@
             %a{href: "#"} Trending
               
         %form.navbar-form.navbar-left{role: "search"}
-          .form-group
-            .input-group.margin-bottom-sm
-              %span.input-group-addon
+          .input-group
+            %input.form-control{name: "query", placeholder: "Search videos", type: "text"}
+            .input-group-btn
+              %button.btn.btn-default{type: "submit"}
                 %i.fa.fa-search.fa-fw
-              %input.form-control{type: "text", placeholder: "Search"}
-            %button.btn.btn-default{type: "submit"} Submit
         %ul.nav.navbar-nav.navbar-right
           - if user_signed_in?
             .btn-group#upload
@@ -50,11 +49,10 @@
                     %i.fa.fa-trash-o.fa-fw
                     Logout
           - else
-            %li
-              %a#facebook-connect{ href: user_omniauth_authorize_path(:facebook) }
-                %button.btn.btn-facebook
-                  %i.fa.fa-facebook 
-                    Connect with Facebook
+            .btn-group#facebook_login
+              %a.btn.btn-primary{href: user_omniauth_authorize_path(:facebook)}
+                %i.fa.fa-facebook 
+                Connect with Facebook
 
   / .jumbotron
   /   %h1 Win an iPad mini!

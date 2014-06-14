@@ -1,4 +1,8 @@
 %h2= @video.title
-.video-container
-  %iframe{width: "620", height: "470", frameborder: "0", src: @video.video_url}
-%p= @video.description
+.row
+  .col-xs-12.col-sm-6.col-md-9
+    .video-container
+      %iframe{width: "620", height: "470", frameborder: "0", src: @video.video_embed_url}
+    %p= @video.description
+  .col-xs-6.col-md-3
+    = render partial: "shared/small_post_pod", collection: Posts::Video.order("created_at desc").limit(5), as: :video
