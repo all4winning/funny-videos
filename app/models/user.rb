@@ -12,6 +12,9 @@ class User < ActiveRecord::Base
   extend FriendlyId
   friendly_id :username, :use => [:slugged, :history]
 
+  acts_as_followable
+  acts_as_followable
+
   def self.find_for_facebook_oauth(auth)
     where(auth.slice(:provider, :uid)).first_or_create do |user|
       user.provider = auth.provider

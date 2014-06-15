@@ -2,15 +2,15 @@ module FunnyVideos
   module Videos
     class AddVideo
 
-      def initialize(video)
-        @video = video
+      def initialize(video_id)
+        @video = Posts::Video.find(video_id)
       end
 
       def perform
         if @video.video_type == "youtube"
-          AddYoutubeVideoWorker.perform_async(@video.id)
+          FunnyVideos::Videos::AddYoutubeVideo.new(@video).perform
         else
-          AddVimeoVideoWorker.perform_async(@video.id)
+          FunnyVideos::Videos::AddVimeoVideo.new(@video).perform
         end
       end
     end

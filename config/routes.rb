@@ -12,6 +12,14 @@ Rails.application.routes.draw do
     resources :videos, except: [:edit, :update]
   end
 
+  resources :users, except: [:create, :new] do
+    member do
+      post :follow
+      post :unfollow
+    end
+    # resources :follow, only: [:create, :destroy]
+  end
+
   authenticate :user, lambda { |u| u.admin? } do
     mount Sidekiq::Web => '/sidekiq'
   end

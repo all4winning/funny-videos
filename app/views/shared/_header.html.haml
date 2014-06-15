@@ -28,11 +28,11 @@
               %button.btn.btn-default{type: "submit"}
                 %i.fa.fa-search.fa-fw
         %ul.nav.navbar-nav.navbar-right
+          .btn-group#upload
+            %a.btn.btn-primary{href: new_posts_video_path}
+              %i.fa.fa-upload.fa-fw
+              Upload
           - if user_signed_in?
-            .btn-group#upload
-              %a.btn.btn-primary{href: new_posts_video_path}
-                %i.fa.fa-upload.fa-fw
-                Upload
             .btn-group#my-account
               %a.btn.btn-primary{href: root_path}
                 %i.fa.fa-user.fa-fw
@@ -51,7 +51,7 @@
           - else
             .btn-group#facebook_login
               %a.btn.btn-primary{href: user_omniauth_authorize_path(:facebook)}
-                %i.fa.fa-facebook 
+                %i.fa.fa-facebook.fa-fw
                 Connect with Facebook
 
   / .jumbotron

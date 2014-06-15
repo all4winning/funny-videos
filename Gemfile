@@ -25,6 +25,8 @@ gem 'simple_form'
 gem 'sidekiq'
 gem 'sinatra', require: false
 gem 'slim'
+gem 'vimeo'
+gem 'acts_as_follower'
 
 group :development do
   gem 'mailcatcher'
