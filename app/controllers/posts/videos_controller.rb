@@ -8,6 +8,7 @@ module Posts
     end
 
     def show
+      FunnyVideos::Videos::AddPostViews.new(current_user, @video, request.remote_ip).perform
     end
 
     def new

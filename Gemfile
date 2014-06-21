@@ -27,6 +27,7 @@ gem 'sinatra', require: false
 gem 'slim'
 gem 'vimeo'
 gem 'acts_as_follower'
+gem 'upsert'
 
 group :development do
   gem 'mailcatcher'
