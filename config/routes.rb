@@ -12,12 +12,16 @@ Rails.application.routes.draw do
     resources :videos, except: [:edit, :update]
   end
 
-  resources :users, except: [:create, :new] do
+  resources :users, only: [:index, :show] do
     member do
       post :follow
       post :unfollow
     end
-    # resources :follow, only: [:create, :destroy]
+    resources :interests, only: [:index] do
+      collection do
+        post :update_all
+      end
+    end
   end
 
   authenticate :user, lambda { |u| u.admin? } do

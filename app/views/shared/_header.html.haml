@@ -41,9 +41,9 @@
                 %span.fa.fa-caret-down
               %ul.dropdown-menu
                 %li
-                  %a{href: root_path}
+                  %a{href: user_interests_path(current_user)}
                     %i.fa.fa-pencil.fa-fw
-                    Edit
+                    Interests
                 %li
                   = link_to destroy_user_session_path, {method: "delete"} do
                     %i.fa.fa-trash-o.fa-fw

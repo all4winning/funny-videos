@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140615134731) do
+ActiveRecord::Schema.define(version: 20140621110443) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,6 +55,30 @@ ActiveRecord::Schema.define(version: 20140615134731) do
   add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
+
+  create_table "interests", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "category_id"
+    t.boolean  "selected",    default: true
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "interests", ["user_id", "category_id"], name: "index_interests_on_user_id_and_category_id", unique: true, using: :btree
+
+  create_table "notification_settings", force: true do |t|
+    t.integer  "user_id"
+    t.string   "notification_type"
+    t.boolean  "email_enabled",        default: true
+    t.boolean  "facebook_enabled",     default: true
+    t.boolean  "notification_enabled", default: true
+    t.boolean  "editable",             default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "notification_settings", ["editable"], name: "index_notification_settings_on_editable", using: :btree
+  add_index "notification_settings", ["user_id", "notification_type"], name: "index_notification_settings_on_user_id_and_notification_type", unique: true, using: :btree
 
   create_table "posts", force: true do |t|
     t.string   "title"

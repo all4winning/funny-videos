@@ -1,0 +1,6 @@
+= bootstrap_form_tag url: update_all_user_interests_path(current_user), methos: "post", layout: :horizontal do |f|
+  = f.form_group :interests do
+    - @interests.each do |interest|
+      = f.check_box "interests[#{interest.id}]", label: interest.category.name, checked: interest.selected
+  = f.form_group do
+    = f.primary

@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  notification_type: MyString
+  category: MyString
+  email_enabled: false
+  facebook_enabled: false
+  notification_enabled: false
+
+two:
+  user_id: 1
+  notification_type: MyString
+  category: MyString
+  email_enabled: false
+  facebook_enabled: false
+  notification_enabled: false

@@ -18,7 +18,6 @@ module Posts
       @add_form = FunnyVideos::Videos::AddForm.new(current_user)
       if @add_form.submit(params)
         AddVideoWorker.perform_async(@add_form.video.id)
-        # FunnyVideos::Videos::AddVideo.new(@add_form.video).perform
         flash[:notice] = "Your video will be added shortly. You will be notified when ready."
         redirect_to action: "index"
       else
