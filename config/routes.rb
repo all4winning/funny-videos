@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     resources :videos, except: [:edit, :update] do
       collection do
         get :search
+        get :latest_videos
       end
     end
   end
