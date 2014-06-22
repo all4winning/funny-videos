@@ -21,10 +21,11 @@
           %li
             %a{href: "#"} Trending
               
-        %form.navbar-form.navbar-left{role: "search", action: search_path, method: "post"}
+        %form.navbar-form.navbar-left{role: "search", action: search_posts_videos_path, method: "get"}
           .input-group
             %input.form-control{name: "query", placeholder: "Search videos", type: "text"}
-            %input{name: "authenticity_token", type: "hidden", value: "f755bb0ed134b76c432144748a6d4b7a7ddf2b71"}
+            = csrf_meta_tag
+            -#%input{name: "authenticity_token", type: "hidden", value: "f755bb0ed134b76c432144748a6d4b7a7ddf2b71"}
             .input-group-btn
               %button.btn.btn-default{type: "submit"}
                 %i.fa.fa-search.fa-fw

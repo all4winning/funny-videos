@@ -8,10 +8,12 @@ Rails.application.routes.draw do
     delete '/users/logout'  => 'users/sessions#destroy',   :as => :destroy_user_session
   end
   
-  post '/search'  => 'home#search',   :as => :search
-  
   namespace :posts do
-    resources :videos, except: [:edit, :update]
+    resources :videos, except: [:edit, :update] do
+      collection do
+        get :search
+      end
+    end
   end
 
   resources :users, only: [:index, :show] do
