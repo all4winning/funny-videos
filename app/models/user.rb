@@ -3,11 +3,13 @@ class User < ActiveRecord::Base
   EDITABLE_NOTIFICATIONS = [:newsletter, :follow]
 
   attr_accessible :image
+  attr_readonly :post_views_count, :posts_count
   devise :omniauthable, :omniauth_providers => [:facebook]
 
   has_many :posts
   has_many :interests
   has_many :notification_settings
+  has_many :post_views
 
   has_attached_file :image, :default_url => "/images/users/:style/missing.png"
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/

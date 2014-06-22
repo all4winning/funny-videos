@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140621110443) do
+ActiveRecord::Schema.define(version: 20140621161101) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -80,6 +80,17 @@ ActiveRecord::Schema.define(version: 20140621110443) do
   add_index "notification_settings", ["editable"], name: "index_notification_settings_on_editable", using: :btree
   add_index "notification_settings", ["user_id", "notification_type"], name: "index_notification_settings_on_user_id_and_notification_type", unique: true, using: :btree
 
+  create_table "post_views", force: true do |t|
+    t.string   "ip"
+    t.integer  "user_id"
+    t.integer  "post_id"
+    t.integer  "nr_views",   default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "post_views", ["user_id", "post_id", "ip"], name: "index_post_views_on_user_id_and_post_id_and_ip", unique: true, using: :btree
+
   create_table "posts", force: true do |t|
     t.string   "title"
     t.text     "description"
@@ -96,6 +107,7 @@ ActiveRecord::Schema.define(version: 20140621110443) do
     t.string   "video_id"
     t.string   "video_type"
     t.string   "video_embed_url"
+    t.integer  "post_views_count"
   end
 
   create_table "posts_tags", force: true do |t|
@@ -144,6 +156,8 @@ ActiveRecord::Schema.define(version: 20140621110443) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+    t.integer  "post_views_count"
+    t.integer  "posts_count"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
