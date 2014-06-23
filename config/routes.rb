@@ -14,6 +14,7 @@ Rails.application.routes.draw do
         get :search
         get :latest_videos
         get :popular_videos
+        get :trending_videos
       end
     end
   end
