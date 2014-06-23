@@ -1,8 +1,16 @@
+=content_for(:head) do
+  %meta{:property => "og:title", :content => @video.title}
+  %meta{:property => "og:description", :content => @video.description}
+  -# NB: THIS WON'T WORK WITH RAIL ASSET HOSTS
+  %meta{:property => "og:image", :content => "http://4cceba3b.ngrok.com#{@video.image.url(:video)}"}
+  %link{:rel => "canonical", :href => posts_video_url(@video)}
 %h2= @video.title
 .row
   .col-xs-12.col-sm-6.col-md-9
     .video-container
       %iframe{width: "620", height: "470", frameborder: "0", src: @video.video_embed_url}
+    .share-buttons.text-center
+      = render partial: "shared/share_buttons", locals: { video: @video }
     %p= @video.description
   .col-xs-6.col-md-3
     = render partial: "shared/small_post_pod", collection: Posts::Video.order("created_at desc").limit(5), as: :video
