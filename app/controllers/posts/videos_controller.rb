@@ -1,6 +1,6 @@
 module Posts
   class VideosController < ApplicationController
-    before_filter :authenticate_user!, :except => [:show, :search, :latest_videos, :popular_videos]
+    before_filter :authenticate_user!, :except => [:show, :search, :latest_videos, :popular_videos, :trending_videos]
     before_filter :load_video, only: [:show, :destroy]
 
     def index
@@ -41,6 +41,13 @@ module Posts
     def popular_videos
       @videos = Posts::Video.select('COUNT(*) AS total, posts.*').
                              joins('LEFT OUTER JOIN post_views ON posts.id = post_views.post_id').
+                             group('posts.id').
+                             order('total DESC')
+
+    def trending_videos
+      @videos = Posts::Video.select('COUNT(*) AS total, posts.*').
+                             joins('LEFT OUTER JOIN post_views ON posts.id = post_views.post_id').
+                             where('post_views.updated_at >= ?', 1.week.ago).
                              group('posts.id').
                              order('total DESC')
     end
