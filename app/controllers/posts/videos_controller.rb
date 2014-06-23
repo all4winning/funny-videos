@@ -1,6 +1,6 @@
 module Posts
   class VideosController < ApplicationController
-    before_filter :authenticate_user!, :except => [:show, :search]
+    before_filter :authenticate_user!, :except => [:show, :search, :latest_videos]
     before_filter :load_video, only: [:show, :destroy]
 
     def index
@@ -32,6 +32,10 @@ module Posts
     
     def search
       @videos = Posts::Video.where('LOWER(title) LIKE ?', "%#{params[:query].downcase}%")
+    end
+    
+    def latest_videos
+      @videos = Posts::Video.order(created_at: :desc)
     end
 
     private 
