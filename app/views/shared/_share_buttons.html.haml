@@ -1,0 +1,9 @@
+%a.btn.btn-primary.btn-lg{href: "https://www.facebook.com/dialog/share?app_id=#{Rails.configuration.facebook_app_id}&display=popup&href=#{posts_video_url(video)}&redirect_uri=#{posts_video_url(video)}"}
+  %i.fa.fa-facebook.fa-fw
+  Share on facebook
+%a.btn.btn-primary.btn-lg{href: "http://twitter.com/intent/tweet?source=sharethiscom&text=#{video.title}&url=#{posts_video_url(video)}"}
+  %i.fa.fa-twitter.fa-fw
+  Share on twitter
+%a.btn.btn-primary.btn-lg{href: "https://plus.google.com/share?url=#{posts_video_url(video)}"}
+  %i.fa.fa-google-plus.fa-fw
+  Share on google plus
