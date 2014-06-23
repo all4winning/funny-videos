@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       collection do
         get :search
         get :latest_videos
+        get :popular_videos
       end
     end
   end
