@@ -43,6 +43,7 @@ module Posts
                              joins('LEFT OUTER JOIN post_views ON posts.id = post_views.post_id').
                              group('posts.id').
                              order('total DESC')
+    end
 
     def trending_videos
       @videos = Posts::Video.select('COUNT(*) AS total, posts.*').
