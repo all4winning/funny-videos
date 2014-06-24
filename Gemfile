@@ -28,6 +28,12 @@ gem 'slim'
 gem 'vimeo'
 gem 'acts_as_follower'
 gem 'upsert'
+gem 'will_paginate-bootstrap'
+gem 'state_machine'
+gem 'whenever', :require => false
+gem 'select2-rails'
+gem 'activeadmin', github: 'gregbell/active_admin'
+gem 'meta_search'
 
 group :development do
   gem 'mailcatcher'
@@ -35,6 +41,7 @@ group :development do
   gem 'haml-rails', '~> 0.5.3'
   gem 'capistrano-rails'
   gem 'spring'
+  gem 'rack-mini-profiler'
 end
 
 group :development, :test do

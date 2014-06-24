@@ -6,5 +6,8 @@ class AddCounterCacheColumns < ActiveRecord::Migration
   end
 
   def down
+    remove_column :posts, :post_views_count
+    remove_column :users, :post_views_count
+    remove_column :users, :posts_count
   end
 end
