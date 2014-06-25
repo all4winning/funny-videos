@@ -22,6 +22,15 @@
             %a{href: popular_videos_posts_videos_path} Popular
           %li
             %a{href: trending_videos_posts_videos_path} Trending
+          %li.dropdown
+            %a.dropdown-toggle{href: "#", :"data-toggle" => "dropdown"}
+              Categories
+              %b.caret
+            %ul.dropdown-menu
+              - @categories.each do |category|
+                %li
+                  %a{href:"#"}
+                    = category.name
               
         %form.navbar-form.navbar-left{role: "search", action: search_posts_videos_path, method: "get"}
           .input-group
@@ -44,12 +53,28 @@
                 %span.fa.fa-caret-down
               %ul.dropdown-menu
                 %li
+                  %a{href: admin_root_path}
+                    %i.fa.fa-user.fa-fw
+                    Administration
+                %li
                   %a{href: user_interests_path(current_user)}
-                    %i.fa.fa-pencil.fa-fw
+                    %i.fa.fa-video-camera.fa-fw
+                    My Videos
+                %li
+                  %a{href: user_interests_path(current_user)}
+                    %i.fa.fa-eye.fa-fw
                     Interests
                 %li
+                  %a{href: user_interests_path(current_user)}
+                    %i.fa.fa-heart.fa-fw
+                    Favorites
+                %li
+                  %a{href: user_interests_path(current_user)}
+                    %i.fa.fa-cog.fa-fw
+                    Privacy Settings
+                %li
                   = link_to destroy_user_session_path, {method: "delete"} do
-                    %i.fa.fa-trash-o.fa-fw
+                    %i.fa.fa-sign-out.fa-fw
                     Logout
           - else
             .btn-group#facebook_login

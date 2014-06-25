@@ -1,4 +1,6 @@
-=content_for(:head) do
+= content_for(:title) do
+  = @video.title
+= content_for(:head) do
   %meta{:property => "og:title", :content => @video.title}
   %meta{:property => "og:description", :content => @video.description}
   -# NB: THIS WON'T WORK WITH RAIL ASSET HOSTS
@@ -7,10 +9,34 @@
 %h2= @video.title
 .row
   .col-xs-12.col-sm-6.col-md-9
+    .details.clearfix
+      .author.pull-left
+        Posted by
+        %a{href: user_path(@video.user)}
+          %b= @video.user.first_name
+        %a.btn.btn-primary{href: "#"}
+          %i.fa.fa-users
+          Follow
+      .stats.pull-right
+        .views
+          %i.fa.fa-eye.fa-3x
+        .views_count
+          = @video.post_views.count
+        .like
+          %a{href: "#"}
+            %i.fa.fa-thumbs-up.fa-3x
+        .like_count
+          100
+        .dislike
+          %a{href: "#"}
+            %i.fa.fa-thumbs-down.fa-3x
+        .favorite
+          %a{href: "#"}
+            %i.fa.fa-heart.fa-3x
     .video-container
       %iframe{width: "620", height: "470", frameborder: "0", src: @video.video_embed_url}
     .share-buttons.text-center
       = render partial: "shared/share_buttons", locals: { video: @video }
-    %p= @video.description
+    %p= @video.description.html_safe
   .col-xs-6.col-md-3
     = render partial: "shared/small_post_pod", collection: Posts::Video.order("created_at desc").limit(5), as: :video
