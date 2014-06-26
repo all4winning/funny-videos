@@ -29,7 +29,7 @@
             %ul.dropdown-menu
               - @categories.each do |category|
                 %li
-                  %a{href:"#"}
+                  %a{href: posts_category_path(category.id)}
                     = category.name
               
         %form.navbar-form.navbar-left{role: "search", action: search_posts_videos_path, method: "get"}

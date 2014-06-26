@@ -18,6 +18,8 @@ Rails.application.routes.draw do
         get :trending_videos
       end
     end
+    resources :categories, only: [:show] do
+    end
   end
 
   resources :users, only: [:index, :show] do
