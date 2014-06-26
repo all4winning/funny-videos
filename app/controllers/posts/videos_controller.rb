@@ -8,6 +8,12 @@ module Posts
     end
 
     def show
+      @related_videos = Posts::Video.select('COUNT(*) AS total, posts.*').
+                             joins('LEFT OUTER JOIN post_views ON posts.id = post_views.post_id').
+                             joins(:categories).
+                             where(categories: {name: @video.categories.first.name}).
+                             group('posts.id').
+                             order('total DESC')                               
       FunnyVideos::Videos::AddPostViews.new(current_user, @video, request.remote_ip).perform
     end
 

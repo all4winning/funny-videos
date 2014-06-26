@@ -39,4 +39,4 @@
       = render partial: "shared/share_buttons", locals: { video: @video }
     %p= @video.description.html_safe
   .col-xs-6.col-md-3
-    = render partial: "shared/small_post_pod", collection: Posts::Video.order("created_at desc").limit(5), as: :video
+    = render partial: "shared/small_post_pod", :collection => @related_videos, :as => :video
