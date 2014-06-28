@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!, :except => [:show, :index]
-  before_filter :load_user, only: [:index]
+  before_filter :load_user, except: [:index]
 
   def index
     @users = User.all
@@ -10,14 +10,16 @@ class UsersController < ApplicationController
   end
 
   def follow
+    current_user.follow(@user)
   end
 
   def unfollow
+    current_user.stop_following(@user)
   end
 
   private
 
   def load_user
-    @user = User.find(params[:id])
+    @user = User.friendly.find(params[:id])
   end
 end

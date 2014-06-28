@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
   friendly_id :username, :use => [:slugged, :history]
 
   acts_as_followable
-  acts_as_followable
+  acts_as_follower
 
   after_create :add_interests
   after_create :add_notification_settings
