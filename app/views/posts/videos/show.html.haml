@@ -14,9 +14,15 @@
         Posted by
         %a{href: user_path(@video.user)}
           %b= @video.user.first_name
-        %a.btn.btn-primary{href: "#"}
-          %i.fa.fa-users
-          Follow
+        - if current_user && current_user != @video.user
+          -if current_user.following?(@video.user) 
+            = link_to unfollow_user_path(@video.user), :class => "btn btn-primary follow-user", method: 'post', remote: true do
+              %i.fa.fa-users
+              Following
+          - else
+            = link_to follow_user_path(@video.user), :class => "btn btn-primary follow-user", method: 'post', remote: true do
+              %i.fa.fa-users
+              Follow
       .stats.pull-right
         .views
           %i.fa.fa-eye.fa-3x
