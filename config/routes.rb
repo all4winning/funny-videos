@@ -25,7 +25,10 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :show] do
     member do
       post :follow
-      post :unfollow
+      post :unfollow 
+    end
+    collection do
+      get :feed   
     end
     resources :interests, only: [:index] do
       collection do

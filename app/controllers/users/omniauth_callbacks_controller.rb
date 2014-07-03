@@ -5,7 +5,8 @@ module Users
       @user = User.find_for_facebook_oauth(request.env["omniauth.auth"])
 
       if @user.persisted?
-        sign_in_and_redirect @user, :event => :authentication #this will throw if @user is not activated
+        sign_in @user, :event => :authentication #this will throw if @user is not activated
+        redirect_to feed_users_path
         set_flash_message(:notice, :success, :kind => "Facebook") if is_navigational_format?
       else
         set_flash_message(:error, :failure, :kind => "Facebook") if is_navigational_format?
