@@ -1,12 +1,19 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!, :except => [:show, :index]
-  before_filter :load_user, except: [:index]
+  before_filter :load_user, except: [:index, :feed]
 
   def index
     @users = User.all
   end
 
   def show
+  end
+  
+  def feed
+    @videos = Posts::Video.joins('LEFT OUTER JOIN follows ON posts.user_id = follows.followable_id').
+                           joins('INNER JOIN categories_posts on posts.id=categories_posts.post_id').
+                           joins('LEFT OUTER JOIN interests ON categories_posts.category_id = interests.category_id').
+                           where('(follows.follower_id=?)OR(interests.selected=TRUE and interests.user_id=?)', current_user.id, current_user.id) 
   end
 
   def follow
