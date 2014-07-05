@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     member do
       post :follow
       post :unfollow 
+      get :my_videos
     end
     collection do
       get :feed   
