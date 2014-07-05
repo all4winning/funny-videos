@@ -4,6 +4,7 @@ module Posts
     has_and_belongs_to_many :tags
     has_many :post_views
     has_many :reputations
+    has_many :favorites
     belongs_to :user, counter_cache: true
 
     attr_readonly :post_views_count

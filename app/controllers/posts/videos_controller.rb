@@ -67,6 +67,15 @@ module Posts
       @videos = Posts::Video.where('LOWER(title) LIKE ?', "%#{params[:query].downcase}%")
     end
     
+    def add_to_favorites
+      Favorites.find_or_create_by_user_id_and_post_id(current_user.id, params[:id])
+    end
+    
+    def remove_from_favorites
+      fav=Favorites.find_by_user_id_and_post_id(current_user.id, params[:id])
+      fav.destroy
+    end
+    
     def latest_videos
       @videos = Posts::Video.order(created_at: :desc)
     end

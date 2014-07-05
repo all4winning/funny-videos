@@ -20,6 +20,8 @@ Rails.application.routes.draw do
       member do
         get :like
         get :unlike
+        get :add_to_favorites
+        post :remove_from_favorites
       end
     end
     resources :categories, only: [:show] do
@@ -29,8 +31,9 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :show] do
     member do
       post :follow
-      post :unfollow 
+      post :unfollow
       get :my_videos
+      get :favorites
     end
     collection do
       get :feed   
@@ -39,7 +42,7 @@ Rails.application.routes.draw do
       collection do
         post :update_all
       end
-    end
+    end  
   end
 
   authenticate :user, lambda { |u| u.admin? } do

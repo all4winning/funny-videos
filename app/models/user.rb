@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   has_many :reputations
   has_many :notification_settings
   has_many :post_views
+  has_many :favorites
 
   has_attached_file :image, :default_url => "/images/users/:style/missing.png"
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
