@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
 
   has_many :posts
   has_many :interests
+  has_many :reputations
   has_many :notification_settings
   has_many :post_views
 
