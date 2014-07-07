@@ -1,7 +1,8 @@
 module Posts
   class VideosController < ApplicationController
     before_filter :authenticate_user!, :except => [:show, :search, :latest_videos, :popular_videos, :trending_videos]
-    before_filter :load_video, only: [:show, :destroy]
+    before_filter :load_video, only: [:show, :destroy, :like, :unlike]
+    before_filter :reputation, only: [:show]
 
     def index
       @videos = Posts::Video.all
@@ -36,6 +37,32 @@ module Posts
     def destroy
     end
     
+    def like
+      rep = Reputation.find_by_user_id_and_post_id(current_user.id, @video.id)
+      if Reputation.exists?(rep)
+        if rep.like == 0
+          rep.like = 1
+          rep.unlike = 0
+          rep.save()
+        end
+      else
+        Reputation.create(user_id=current_user.id, post_id=params[:id], like=1, unlike=0)  
+      end
+    end
+    
+    def unlike
+      rep = Reputation.find_by_user_id_and_post_id(current_user.id, @video.id)
+      if Reputation.exists?(rep)
+        if rep.unlike == 0
+          rep.unlike = 1
+          rep.like = 0
+          rep.save()
+        end
+      else
+        Reputation.create(user_id=current_user.id, post_id=params[:id], like=False, unlike=True)  
+      end
+    end
+    
     def search
       @videos = Posts::Video.where('LOWER(title) LIKE ?', "%#{params[:query].downcase}%")
     end
@@ -63,6 +90,17 @@ module Posts
 
     def load_video
       @video = Posts::Video.friendly.find(params[:id])
+    end
+    
+    def reputation
+      rep = Reputation.select("SUM(reputations.like) as likes, SUM(unlike) as unlikes").
+                               group('post_id').
+                               where('post_id =?',@video.id)
+      if rep.exists?
+        @reputation=rep[0].likes - rep[0].unlikes
+      else
+        @reputation=0
+      end                                                    
     end
   end
 end

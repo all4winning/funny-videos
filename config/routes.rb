@@ -17,6 +17,10 @@ Rails.application.routes.draw do
         get :popular_videos
         get :trending_videos
       end
+      member do
+        get :like
+        get :unlike
+      end
     end
     resources :categories, only: [:show] do
     end

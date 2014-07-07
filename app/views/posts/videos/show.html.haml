@@ -26,16 +26,18 @@
       .stats.pull-right
         .views
           %i.fa.fa-eye.fa-3x
+          = link_to 'asd', like_posts_video_path(@video)
         .views_count
           = @video.post_views.count
         .like
           %a{href: "#"}
             %i.fa.fa-thumbs-up.fa-3x
         .like_count
-          100
+          = @reputation
         .dislike
           %a{href: "#"}
             %i.fa.fa-thumbs-down.fa-3x
+            = link_to 'asd', unlike_posts_video_path(@video)
         .favorite
           %a{href: "#"}
             %i.fa.fa-heart.fa-3x
