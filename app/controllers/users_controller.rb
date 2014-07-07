@@ -15,6 +15,10 @@ class UsersController < ApplicationController
                            joins('LEFT OUTER JOIN interests ON categories_posts.category_id = interests.category_id').
                            where('(follows.follower_id=?)OR(interests.selected=TRUE and interests.user_id=?)', current_user.id, current_user.id) 
   end
+  
+  def my_videos
+    @videos = Posts::Video.where('posts.user_id =?', current_user.id)
+  end
 
   def follow
     current_user.follow(@user)
