@@ -20,6 +20,11 @@ class UsersController < ApplicationController
     @videos = Posts::Video.where('posts.user_id =?', current_user.id)
   end
 
+  def favorites
+    @videos = Posts::Video.joins('INNER JOIN favorites ON posts.id = favorites.post_id').
+                           where('(favorites.user_id=?)', current_user.id)
+  end
+
   def follow
     current_user.follow(@user)
   end

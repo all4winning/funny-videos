@@ -30,8 +30,7 @@
         .views_count
           = @video.post_views.count
         .like
-          %a{href: "#"}
-            %i.fa.fa-thumbs-up.fa-3x
+          %i.fa.fa-thumbs-up.fa-3x
         .like_count
           = @reputation
         .dislike
@@ -39,7 +38,7 @@
             %i.fa.fa-thumbs-down.fa-3x
             = link_to 'asd', unlike_posts_video_path(@video)
         .favorite
-          %a{href: "#"}
+          = link_to add_to_favorites_posts_video_path(@video), :class => "favorite-post", method: 'post', remote: true do
             %i.fa.fa-heart.fa-3x
     .video-container
       %iframe{width: "620", height: "470", frameborder: "0", src: @video.video_embed_url}
