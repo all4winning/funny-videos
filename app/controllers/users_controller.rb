@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :authenticate_user!, :except => [:show, :index]
+  before_filter :authenticate_user!, :except => [:show, :index, :subscribe, :unsubscribe]
   before_filter :load_user, except: [:index, :feed, :subscribe]
 
   def index
