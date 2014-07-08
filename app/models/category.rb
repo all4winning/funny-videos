@@ -5,7 +5,7 @@ class Category < ActiveRecord::Base
   extend FriendlyId
   friendly_id :name, :use => [:slugged, :history]
 
-  has_and_belongs_to_many :posts, class_name: "::Posts::Post"
+  has_and_belongs_to_many :posts
   has_many :interests, :dependent => :delete_all
 
   after_create :add_new_interests

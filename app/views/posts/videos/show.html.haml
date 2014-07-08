@@ -26,20 +26,23 @@
       .stats.pull-right
         .views
           %i.fa.fa-eye.fa-3x
-          = link_to 'asd', like_posts_video_path(@video)
         .views_count
           = @video.post_views.count
         .like
-          %i.fa.fa-thumbs-up.fa-3x
+          = link_to like_posts_video_path(@video), method: 'post', remote: true do
+            %i.fa.fa-thumbs-up.fa-3x
         .like_count
           = @reputation
         .dislike
-          %a{href: "#"}
+          = link_to unlike_posts_video_path(@video), method: 'post', remote: true do
             %i.fa.fa-thumbs-down.fa-3x
-            = link_to 'asd', unlike_posts_video_path(@video)
         .favorite
-          = link_to add_to_favorites_posts_video_path(@video), :class => "favorite-post", method: 'post', remote: true do
-            %i.fa.fa-heart.fa-3x
+          - if current_user && @video.favorized_by?(current_user)
+            = link_to remove_from_favorites_posts_video_path(@video), :class => "favorite-post", method: 'post', remote: true do
+              %i.fa.fa-heart.fa-3x
+          - else
+            = link_to add_to_favorites_posts_video_path(@video), :class => "favorite-post", method: 'post', remote: true do
+              %i.fa.fa-heart.fa-3x
     .video-container
       %iframe{width: "620", height: "470", frameborder: "0", src: @video.video_embed_url}
     .share-buttons.text-center

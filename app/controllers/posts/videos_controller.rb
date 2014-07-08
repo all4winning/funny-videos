@@ -46,8 +46,9 @@ module Posts
           rep.save()
         end
       else
-        Reputation.create(user_id=current_user.id, post_id=params[:id], like=1, unlike=0)  
+        Reputation.create(user_id: current_user.id, post_id: params[:id], like: 1, unlike: 0)  
       end
+      reputation
     end
     
     def unlike
@@ -59,8 +60,9 @@ module Posts
           rep.save()
         end
       else
-        Reputation.create(user_id=current_user.id, post_id=params[:id], like=False, unlike=True)  
+        Reputation.create(user_id: current_user.id, post_id: params[:id], like: 0, unlike: 1)  
       end
+      reputation
     end
     
     def search
@@ -68,11 +70,11 @@ module Posts
     end
     
     def add_to_favorites
-      Favorites.find_or_create_by_user_id_and_post_id(current_user.id, params[:id])
+      Favorite.find_or_create_by_user_id_and_post_id(current_user.id, params[:id])
     end
     
     def remove_from_favorites
-      fav=Favorites.find_by_user_id_and_post_id(current_user.id, params[:id])
+      fav=Favorite.find_by_user_id_and_post_id(current_user.id, params[:id])
       fav.destroy
     end
     
@@ -109,7 +111,7 @@ module Posts
         @reputation=rep[0].likes - rep[0].unlikes
       else
         @reputation=0
-      end                                                    
+      end                                                   
     end
   end
 end

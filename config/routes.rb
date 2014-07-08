@@ -18,8 +18,8 @@ Rails.application.routes.draw do
         get :trending_videos
       end
       member do
-        get :like
-        get :unlike
+        post :like
+        post :unlike
         post :add_to_favorites
         post :remove_from_favorites
       end

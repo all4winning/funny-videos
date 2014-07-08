@@ -1,4 +1,4 @@
-ActiveAdmin.register Posts::Post do
+ActiveAdmin.register Post do
 
   
   # See permitted parameters documentation:
