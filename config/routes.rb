@@ -36,7 +36,9 @@ Rails.application.routes.draw do
       get :favorites
     end
     collection do
-      get :feed   
+      get :feed  
+      post :subscribe
+      get :unsubscribe 
     end
     resources :interests, only: [:index] do
       collection do

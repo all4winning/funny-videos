@@ -1,1 +1,8 @@
+%h4 Subscribe to our newsletter
+
+= bootstrap_form_tag url: subscribe_users_path, methos: "post", layout: :horizontal do |f|
+  = f.text_field 'Email:',name: 'email', type:'email', required: 'True'
+  = f.form_group do
+    = f.primary 'Subscribe'
+
 = render partial: "shared/sidebar_post_pod", collection: Posts::Video.order("created_at desc").limit(10), as: :video
