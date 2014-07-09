@@ -2,7 +2,7 @@ funny-videos
 ============
 
 Competition
-1. tonto.ro
+- tonto.ro
 
 Verison 2
 - mark videos as watched
