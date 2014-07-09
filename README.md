@@ -1,8 +1,8 @@
 funny-videos
 ============
 
-Testing
-tonto.ro
+Competition
+1. tonto.ro
 
 Verison 2
 - mark videos as watched
