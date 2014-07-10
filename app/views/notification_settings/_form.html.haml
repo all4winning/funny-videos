@@ -1,0 +1,6 @@
+= bootstrap_form_tag url: update_all_user_notification_settings_path(current_user), methos: "post", layout: :horizontal do |f|
+  = f.form_group :notification_settings do
+    - @notification_settings.each do |notification|
+      = f.check_box "notification_settings[#{notification.id}]", label: t("activerecord.attributes.models.notification_setting.#{notification.notification_type}"), checked: notification.email_enabled
+  = f.form_group do
+    = f.primary

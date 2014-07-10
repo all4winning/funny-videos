@@ -1,0 +1,7 @@
+en:
+  activerecord:
+    attributes:
+      models:
+        notification_setting:
+          newsletter: "Receive our newsletter"
+          follow: "Receive notification when a user follows you"

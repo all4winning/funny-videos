@@ -1,5 +1,5 @@
 class InterestsController < ApplicationController
-  before_filter :authenticate_user!, :except => [:show, :index]
+  before_filter :authenticate_user!
 
   def index
     @interests = current_user.interests.includes(:category)
