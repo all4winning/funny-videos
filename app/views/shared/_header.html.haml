@@ -13,7 +13,7 @@
       #bs-example-navbar-collapse-1.collapse.navbar-collapse
         %ul.nav.navbar-nav
           %li.active
-            %a{href: "#"} 
+            %a{href: root_path} 
               %i.fa.fa-home.fa-fw
               Home
           %li
@@ -46,7 +46,7 @@
               Upload
           - if user_signed_in?
             .btn-group#my-account
-              %a.btn.btn-primary{href: root_path}
+              %a.btn.btn-primary{href: feed_users_path}
                 %i.fa.fa-user.fa-fw
                 = current_user.username
               %a.btn.btn-primary.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
