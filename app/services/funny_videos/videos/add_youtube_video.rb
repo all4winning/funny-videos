@@ -24,7 +24,7 @@ module FunnyVideos
         rescue Exception => e
           @video.image = fallback_image_url
         end
-        @video.save
+        @video.fire_state_event(:publish)
       end
 
       def youtube_video

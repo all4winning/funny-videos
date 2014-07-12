@@ -5,7 +5,7 @@ module Posts
     def show
       @videos = Posts::Video.joins(:categories).
                              where("categories.slug = '#{params[:id]}'").
-                             order(created_at: :desc) 
+                             order(created_at: :desc).published 
     end
   
   end

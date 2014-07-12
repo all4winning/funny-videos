@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140705165141) do
+ActiveRecord::Schema.define(version: 20140712084624) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -115,6 +115,8 @@ ActiveRecord::Schema.define(version: 20140705165141) do
     t.string   "video_type"
     t.string   "video_embed_url"
     t.integer  "post_views_count"
+    t.boolean  "featured"
+    t.string   "state"
   end
 
   create_table "posts_tags", force: true do |t|

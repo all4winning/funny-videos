@@ -5,7 +5,7 @@ module Posts
     before_filter :reputation, only: [:show]
 
     def index
-      @videos = Posts::Video.all
+      @videos = Posts::Video.published
     end
 
     def show
@@ -14,7 +14,7 @@ module Posts
                              joins(:categories).
                              where("categories.id in (#{@video.categories.pluck(:id).join(',')})").
                              group('posts.id').
-                             order('total DESC')                               
+                             order('total DESC').published                               
       FunnyVideos::Videos::AddPostViews.new(current_user, @video, request.remote_ip).perform
     end
 
@@ -66,7 +66,7 @@ module Posts
     end
     
     def search
-      @videos = Posts::Video.where('LOWER(title) LIKE ?', "%#{params[:query].downcase}%")
+      @videos = Posts::Video.where('LOWER(title) LIKE ?', "%#{params[:query].downcase}%").published
     end
     
     def add_to_favorites
@@ -79,14 +79,15 @@ module Posts
     end
     
     def latest_videos
-      @videos = Posts::Video.order(created_at: :desc)
+      @videos = Posts::Video.order(created_at: :desc).published
     end
     
     def popular_videos
       @videos = Posts::Video.select('COUNT(*) AS total, posts.*').
                              joins('LEFT OUTER JOIN post_views ON posts.id = post_views.post_id').
                              group('posts.id').
-                             order('total DESC')
+                             order('total DESC').
+                             published
     end
 
     def trending_videos
@@ -94,13 +95,14 @@ module Posts
                              joins('LEFT OUTER JOIN post_views ON posts.id = post_views.post_id').
                              where('post_views.updated_at >= ?', 1.week.ago).
                              group('posts.id').
-                             order('total DESC')
+                             order('total DESC').
+                             published
     end
 
     private 
 
     def load_video
-      @video = Posts::Video.friendly.find(params[:id])
+      @video = Posts::Video.published.friendly.find(params[:id])
     end
     
     def reputation
