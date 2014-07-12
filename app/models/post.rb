@@ -25,7 +25,7 @@ class Post < ActiveRecord::Base
     end
 
     event :reject do
-      transition :pending => :rejected
+      transition [:pending, :published] => :rejected
     end
   end
 
