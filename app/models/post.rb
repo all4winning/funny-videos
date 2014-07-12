@@ -10,6 +10,24 @@ class Post < ActiveRecord::Base
 
   extend FriendlyId
   friendly_id :title, :use => [:slugged, :history]
+  
+  scope :published, -> {where(state: 'published')}
+  scope :pending, -> {where(state: 'pending')}
+  scope :featured, -> {where(featured: 'True')}
+  
+  state_machine initial: :pending do
+    state :pending, value: 'pending'
+    state :published, value: 'published'
+    state :rejected, value: 'rejected'
+    
+    event :publish do
+      transition :pending => :published
+    end
+
+    event :reject do
+      transition [:pending, :published] => :rejected
+    end
+  end
 
   def favorized_by?(user)
     favorites.where(user_id: user.id).count > 0

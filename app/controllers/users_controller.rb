@@ -13,16 +13,17 @@ class UsersController < ApplicationController
     @videos = Posts::Video.joins('LEFT OUTER JOIN follows ON posts.user_id = follows.followable_id').
                            joins('INNER JOIN categories_posts on posts.id=categories_posts.post_id').
                            joins('LEFT OUTER JOIN interests ON categories_posts.category_id = interests.category_id').
-                           where('(follows.follower_id=?)OR(interests.selected=TRUE and interests.user_id=?)', current_user.id, current_user.id) 
+                           where('(follows.follower_id=?)OR(interests.selected=TRUE and interests.user_id=?)', current_user.id, current_user.id).
+                           published 
   end
   
   def my_videos
-    @videos = Posts::Video.where('posts.user_id =?', current_user.id)
+    @videos = Posts::Video.where('posts.user_id =?', current_user.id).published
   end
 
   def favorites
     @videos = Posts::Video.joins('INNER JOIN favorites ON posts.id = favorites.post_id').
-                           where('(favorites.user_id=?)', current_user.id)
+                           where('(favorites.user_id=?)', current_user.id).published
   end
 
   def follow

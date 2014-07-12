@@ -19,7 +19,7 @@ module FunnyVideos
         @video.video_embed_url = "#{EMBED_URL}#{vimeo_video['id']}"
         @video.video_id = vimeo_video["id"]
         @video.image = vimeo_video["thumbnail_large"]
-        @video.save
+        @video.publish
       end
 
       def vimeo_video
