@@ -10,6 +10,7 @@ module FunnyVideos
 
       def perform
         add_video
+        send_notification
       end
 
       private
@@ -45,6 +46,10 @@ module FunnyVideos
                               :password => YouTubeITConfig.password , 
                               :dev_key => YouTubeITConfig.dev_key
                             )
+      end
+
+      def send_notification
+        FunnyVideos::Notifications::NotificationService.broadcast({type: :video_published, user: @video.user, about: @video})
       end
     end
   end

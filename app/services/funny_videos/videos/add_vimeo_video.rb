@@ -9,6 +9,7 @@ module FunnyVideos
 
       def perform
         add_video
+        send_notification
       end
 
       private
@@ -28,6 +29,10 @@ module FunnyVideos
 
       def video_id
         @video.video_url.split("?")[0].split("#")[0].split("/").last
+      end
+
+      def send_notification
+        FunnyVideos::Notifications::NotificationService.broadcast({type: :video_published, user: @video.user, about: @video})
       end
     end
   end

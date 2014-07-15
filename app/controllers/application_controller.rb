@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_filter :categories
+  before_filter :notifications
 
   def authenticate_admin_user!
     redirect_to '/' and return if user_signed_in? && !current_user.admin?
@@ -20,5 +21,13 @@ class ApplicationController < ActionController::Base
 
   def categories
     @categories ||= Category.all
+  end
+
+  def notifications
+    if current_user
+      @notifications_not_seen_count = current_user.notifications.newer_than(current_user.last_seen_notifications).count
+    else
+      @notifications_not_seen_count = 0
+    end
   end
 end

@@ -3,7 +3,9 @@ module FunnyVideos
     class Notification
 
       def self.video_published(params)
-        #TODO implement this
+        require "debugger"
+        debugger
+        Notification.create(user: params[:user], about: params[:about], notification_type: params[:type])
       end
     end
   end
