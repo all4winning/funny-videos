@@ -9,9 +9,10 @@ class User < ActiveRecord::Base
   has_many :posts
   has_many :interests
   has_many :reputations
-  has_many :notification_settings
+  has_many :privacy_settings, class_name: "NotificationSetting"
   has_many :post_views
   has_many :favorites
+  has_many :notifications, order: "created_at desc", class_name: "Notification"
 
   has_attached_file :image, :default_url => "/images/users/:style/missing.png"
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
@@ -38,23 +39,13 @@ class User < ActiveRecord::Base
     end
   end
 
-  def notifications
+  def notification_settings
      @notifications ||= FunnyVideos::NotificationSettings::NotificationSetting.new(self)
   end
 
   def enabled_notification?(notification, type)
-    notifications[type][notification]
+    notification_settings[type][notification]
   end
-
-  # def enable_notification(notification, type)
-  #   notifications[type][notification] = true
-  #   notifications[type].save
-  # end
-
-  # def disable_notification(notification, type)
-  #   notifications[type][notification] = false
-  #   notifications[type].save
-  # end
 
   private
 

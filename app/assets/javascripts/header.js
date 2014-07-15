@@ -1,11 +1,10 @@
-$("#notifications").click(function(e){
+$("#notifications .dropdown-toggle").click(function(e){
   e.preventDefault();
-  $("#notifications span").addClass("hidden");
+  $("#notifications .dropdown-toggle span").addClass("hidden");
   if ($("#notifications_box li").length < 1) {
     $.ajax({
       type: 'GET',
       url: "/users/user/notifications",
-      // dataType: 'html',
       success: function(html){
         $("#notifications_box").append(html);
       }

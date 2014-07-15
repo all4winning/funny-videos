@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140712084624) do
+ActiveRecord::Schema.define(version: 20140713110001) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -87,6 +87,15 @@ ActiveRecord::Schema.define(version: 20140712084624) do
   add_index "notification_settings", ["editable"], name: "index_notification_settings_on_editable", using: :btree
   add_index "notification_settings", ["user_id", "notification_type"], name: "index_notification_settings_on_user_id_and_notification_type", unique: true, using: :btree
 
+  create_table "notifications", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "about_id"
+    t.string   "about_type"
+    t.string   "notification_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "post_views", force: true do |t|
     t.string   "ip"
     t.integer  "user_id"
@@ -152,11 +161,11 @@ ActiveRecord::Schema.define(version: 20140712084624) do
     t.boolean  "admin"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "encrypted_password",      default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",           default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -165,7 +174,7 @@ ActiveRecord::Schema.define(version: 20140712084624) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
-    t.integer  "failed_attempts",        default: 0,  null: false
+    t.integer  "failed_attempts",         default: 0,  null: false
     t.string   "unlock_token"
     t.datetime "locked_at"
     t.string   "provider"
@@ -176,6 +185,12 @@ ActiveRecord::Schema.define(version: 20140712084624) do
     t.datetime "image_updated_at"
     t.integer  "post_views_count"
     t.integer  "posts_count"
+    t.datetime "last_seen_notifications"
+    t.datetime "birthdate"
+    t.boolean  "banned"
+    t.string   "gender"
+    t.string   "fb_token"
+    t.datetime "fb_token_expires_at"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree

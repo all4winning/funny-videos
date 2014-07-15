@@ -8,7 +8,7 @@ module FunnyVideos
 
       def submit(params)
         if params
-          @user.notification_settings.can_be_edited.each do |notification|
+          @user.privacy_settings.can_be_edited.each do |notification|
             value = params[notification.id.to_s]
             notification.update_attribute(:email_enabled, value) if value.present?
           end

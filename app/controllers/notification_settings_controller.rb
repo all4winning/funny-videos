@@ -2,7 +2,7 @@ class NotificationSettingsController < ApplicationController
   before_filter :authenticate_user!
 
   def index
-    @notification_settings = current_user.notification_settings.can_be_edited
+    @notification_settings = current_user.privacy_settings.can_be_edited
   end
 
   def update_all

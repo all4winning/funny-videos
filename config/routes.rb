@@ -47,7 +47,9 @@ Rails.application.routes.draw do
       collection do
         post :update_all
       end
-    end  
+    end 
+
+    resources :notifications, only: [:index] 
   end
 
   authenticate :user, lambda { |u| u.admin? } do

@@ -1,4 +1,6 @@
 - @notifications.each do |notification|
   %li
-    %a{href: '#'}
-      First Notification
+    %span Your video
+    %a{href: posts_video_path(notification.about)}
+      = notification.about.title
+    %span has been published

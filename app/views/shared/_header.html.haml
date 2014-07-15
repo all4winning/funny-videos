@@ -40,11 +40,12 @@
               %button.btn.btn-default{type: "submit"}
                 %i.fa.fa-search.fa-fw
         %ul.nav.navbar-nav.navbar-right
-          .btn-group#upload
-            %a.btn.btn-primary{href: new_posts_video_path}
-              %i.fa.fa-upload.fa-fw
-              Upload
           - if user_signed_in?
+            .btn-group#notifications
+              %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
+                %i.fa.fa-bullhorn.fa-2x
+                %span{class: notifications_count_class(@notifications_not_seen_count)}= @notifications_not_seen_count
+              %ul#notifications_box.dropdown-menu
             .btn-group#my-account
               %a.btn.btn-primary{href: feed_users_path}
                 %i.fa.fa-user.fa-fw
@@ -81,6 +82,11 @@
               %a.btn.btn-primary{href: user_omniauth_authorize_path(:facebook)}
                 %i.fa.fa-facebook.fa-fw
                 Connect with Facebook
+
+          .btn-group#upload
+            %a.btn.btn-primary{href: new_posts_video_path}
+              %i.fa.fa-upload.fa-fw
+              Upload
 
   / .jumbotron
   /   %h1 Win an iPad mini!

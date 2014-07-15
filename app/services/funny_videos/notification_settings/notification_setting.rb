@@ -8,7 +8,7 @@ module FunnyVideos
       end
 
       def [](type)
-        @notifications[type] ||= @user.notification_settings.find_or_create_by_notification_type(type)
+        @notifications[type] ||= @user.privacy_settings.find_or_create_by_notification_type(type)
       end
     end
   end
