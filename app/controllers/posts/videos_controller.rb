@@ -1,7 +1,7 @@
 module Posts
   class VideosController < ApplicationController
     before_filter :authenticate_user!, :except => [:show, :search, :latest_videos, :popular_videos, :trending_videos]
-    before_filter :load_video, only: [:show, :destroy, :like, :unlike]
+    before_filter :load_video, only: [:show, :destroy, :like, :unlike, :add_to_favorites, :remove_from_favorites]
     before_filter :reputation, only: [:show]
 
     def index
@@ -46,7 +46,7 @@ module Posts
           rep.save()
         end
       else
-        Reputation.create(user_id: current_user.id, post_id: params[:id], like: 1, unlike: 0)  
+        Reputation.create(user_id: current_user.id, post_id: @video.id, like: 1, unlike: 0)  
       end
       reputation
     end
@@ -60,7 +60,7 @@ module Posts
           rep.save()
         end
       else
-        Reputation.create(user_id: current_user.id, post_id: params[:id], like: 0, unlike: 1)  
+        Reputation.create(user_id: current_user.id, post_id: @video.id, like: 0, unlike: 1)  
       end
       reputation
     end
@@ -70,11 +70,11 @@ module Posts
     end
     
     def add_to_favorites
-      Favorite.find_or_create_by_user_id_and_post_id(current_user.id, params[:id])
+      Favorite.find_or_create_by_user_id_and_post_id(current_user.id, @video.id)
     end
     
     def remove_from_favorites
-      fav=Favorite.find_by_user_id_and_post_id(current_user.id, params[:id])
+      fav=Favorite.find_by_user_id_and_post_id(current_user.id, @video.id)
       fav.destroy
     end
     
