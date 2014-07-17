@@ -20,3 +20,6 @@ Teme:
 - http://themeforest.net/item/video-streaming/full_screen_preview/157947
 - http://themeforest.net/item/viduze-video-magazine-html-template/full_screen_preview/6192506
 - http://themeforest.net/item/film-streaming/full_screen_preview/232130
+- http://labs.sevenspark.com/Agility-HTML
+- http://www.little-neko.com/switcher/?theme=Hideo
+- 
