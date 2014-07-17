@@ -14,3 +14,6 @@ Verison 2
 Nice site:
 - http://www.boredpanda.com/
 
+Teme:
+- http://themeforest.net/item/videomag-powerful-video-html-template/full_screen_preview/7979834
+- http://themeforest.net/item/video-magazine-html-magazine-template/full_screen_preview/7687942
