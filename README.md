@@ -17,3 +17,6 @@ Nice site:
 Teme:
 - http://themeforest.net/item/videomag-powerful-video-html-template/full_screen_preview/7979834
 - http://themeforest.net/item/video-magazine-html-magazine-template/full_screen_preview/7687942
+- http://themeforest.net/item/video-streaming/full_screen_preview/157947
+- http://themeforest.net/item/viduze-video-magazine-html-template/full_screen_preview/6192506
+- http://themeforest.net/item/film-streaming/full_screen_preview/232130
