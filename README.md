@@ -2,7 +2,7 @@ funny-videos
 ============
 
 Competition
-- tonto.ro
+- http://www.tonto.ro/
 - http://www.filmsforaction.org
 - http://metro.co.uk/2014/07/12/north-korea-media-tells-country-that-its-team-has-reached-world-cup-final-4796033/
 
