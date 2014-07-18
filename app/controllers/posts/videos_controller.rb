@@ -2,19 +2,14 @@ module Posts
   class VideosController < ApplicationController
     before_filter :authenticate_user!, :except => [:show, :search, :latest_videos, :popular_videos, :trending_videos]
     before_filter :load_video, only: [:show, :destroy, :like, :unlike, :add_to_favorites, :remove_from_favorites]
-    before_filter :reputation, only: [:show]
+
 
     def index
       @videos = Posts::Video.published
     end
 
     def show
-      @related_videos = Posts::Video.select('COUNT(*) AS total, posts.*').
-                             joins('LEFT OUTER JOIN post_views ON posts.id = post_views.post_id').
-                             joins(:categories).
-                             where("categories.id in (#{@video.categories.pluck(:id).join(',')})").
-                             group('posts.id').
-                             order('total DESC').published                               
+      @related_videos = @video.related_videos                              
       FunnyVideos::Videos::AddPostViews.new(current_user, @video, request.remote_ip).perform
     end
 
@@ -38,31 +33,11 @@ module Posts
     end
     
     def like
-      rep = Reputation.find_by_user_id_and_post_id(current_user.id, @video.id)
-      if Reputation.exists?(rep)
-        if rep.like == 0
-          rep.like = 1
-          rep.unlike = 0
-          rep.save()
-        end
-      else
-        Reputation.create(user_id: current_user.id, post_id: @video.id, like: 1, unlike: 0)  
-      end
-      reputation
+      @video.like(current_user.id)
     end
     
     def unlike
-      rep = Reputation.find_by_user_id_and_post_id(current_user.id, @video.id)
-      if Reputation.exists?(rep)
-        if rep.unlike == 0
-          rep.unlike = 1
-          rep.like = 0
-          rep.save()
-        end
-      else
-        Reputation.create(user_id: current_user.id, post_id: @video.id, like: 0, unlike: 1)  
-      end
-      reputation
+      @video.unlike(current_user.id)
     end
     
     def search
@@ -83,20 +58,11 @@ module Posts
     end
     
     def popular_videos
-      @videos = Posts::Video.select('COUNT(*) AS total, posts.*').
-                             joins('LEFT OUTER JOIN post_views ON posts.id = post_views.post_id').
-                             group('posts.id').
-                             order('total DESC').
-                             published
+      @videos = Posts::Video.popular_videos.published
     end
 
     def trending_videos
-      @videos = Posts::Video.select('COUNT(*) AS total, posts.*').
-                             joins('LEFT OUTER JOIN post_views ON posts.id = post_views.post_id').
-                             where('post_views.updated_at >= ?', 1.week.ago).
-                             group('posts.id').
-                             order('total DESC').
-                             published
+      @videos = Posts::Video.trending_videos.published
     end
 
     private 
@@ -105,15 +71,5 @@ module Posts
       @video = Posts::Video.published.friendly.find(params[:id])
     end
     
-    def reputation
-      rep = Reputation.select("SUM(reputations.like) as likes, SUM(unlike) as unlikes").
-                               group('post_id').
-                               where('post_id =?',@video.id)
-      if rep.exists?
-        @reputation=rep[0].likes - rep[0].unlikes
-      else
-        @reputation=0
-      end                                                   
-    end
   end
 end
