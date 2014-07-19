@@ -65,6 +65,7 @@ class Post < ActiveRecord::Base
   
   def related_videos
     related_videos = Posts::Video.select('COUNT(*) AS total, posts.*').
+                                  where('posts.id != ?', self.id).
                                   joins('LEFT OUTER JOIN post_views ON posts.id = post_views.post_id').
                                   joins(:categories).
                                   where("categories.id in (#{categories.pluck(:id).join(',')})").

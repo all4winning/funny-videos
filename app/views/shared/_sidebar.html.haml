@@ -1,1 +1,2 @@
-= render partial: "shared/sidebar_post_pod", collection: Posts::Video.order("created_at desc").limit(10), as: :video
+.sidebar
+  = render partial: "shared/sidebar_post_pod", collection: Posts::Video.order("created_at desc").limit(10), as: :video

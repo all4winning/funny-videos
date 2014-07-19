@@ -4,6 +4,7 @@
   %head
     = render "shared/head"
   %body{class: "#{params[:controller].gsub('/', '-')} #{params[:action]}"}
+    #fb-root
     %header
       = render "shared/header"
     #content

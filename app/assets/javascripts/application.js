@@ -19,3 +19,5 @@
 
 //= require bootstrap
 //= require header
+
+$(".show-tooltip").tooltip();

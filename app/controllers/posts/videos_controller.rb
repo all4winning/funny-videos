@@ -9,7 +9,7 @@ module Posts
     end
 
     def show
-      @related_videos = @video.related_videos                              
+      @related_videos = @video.related_videos.limit(5)                           
       FunnyVideos::Videos::AddPostViews.new(current_user, @video, request.remote_ip).perform
     end
 

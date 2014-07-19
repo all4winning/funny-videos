@@ -1,52 +1,77 @@
 = content_for(:title) do
   = @video.title
+
 = content_for(:head) do
   %meta{:property => "og:title", :content => @video.title}
   %meta{:property => "og:description", :content => @video.description}
   -# NB: THIS WON'T WORK WITH RAIL ASSET HOSTS
   %meta{:property => "og:image", :content => "http://4cceba3b.ngrok.com#{@video.image.url(:video)}"}
   %link{:rel => "canonical", :href => posts_video_url(@video)}
-%h2= @video.title
-.row
-  .col-xs-12.col-sm-6.col-md-9
-    .details.clearfix
-      .author.pull-left
-        Posted by
-        %a{href: user_path(@video.user)}
-          %b= @video.user.first_name
-        - if current_user && current_user != @video.user
-          -if current_user.following?(@video.user) 
-            = link_to unfollow_user_path(@video.user), :class => "btn btn-primary follow-user", method: 'post', remote: true do
-              %i.fa.fa-users
-              Following
-          - else
-            = link_to follow_user_path(@video.user), :class => "btn btn-primary follow-user", method: 'post', remote: true do
-              %i.fa.fa-users
-              Follow
-      .stats.pull-right
-        .views
-          %i.fa.fa-eye.fa-3x
-        .views_count
-          = @video.post_views.count
-        .like
-          = link_to like_posts_video_path(@video), method: 'post', remote: true do
-            %i.fa.fa-thumbs-up.fa-3x
-        .like_count
-          = @video.reputation
-        .dislike
-          = link_to unlike_posts_video_path(@video), method: 'post', remote: true do
-            %i.fa.fa-thumbs-down.fa-3x
-        .favorite
-          - if current_user && @video.favorized_by?(current_user)
-            = link_to remove_from_favorites_posts_video_path(@video), :class => "favorite-post", method: 'post', remote: true do
-              %i.fa.fa-heart.fa-3x
-          - else
-            = link_to add_to_favorites_posts_video_path(@video), :class => "favorite-post", method: 'post', remote: true do
-              %i.fa.fa-heart.fa-3x
-    .video-container
-      %iframe{width: "620", height: "470", frameborder: "0", src: @video.video_embed_url}
-    .share-buttons.text-center
-      = render partial: "shared/share_buttons", locals: { video: @video }
-    %p= @video.description.html_safe
-  .col-xs-6.col-md-3
-    = render partial: "shared/small_post_pod", :collection => @related_videos, :as => :video
+
+= content_for(:video) do
+  %h1= @video.title
+  .row
+    .col-md-8
+      .details.clearfix
+        .author.pull-left
+          Posted by
+          %a{href: user_path(@video.user)}
+            %b= @video.user.first_name
+          - if current_user && current_user != @video.user
+            -if current_user.following?(@video.user) 
+              = link_to unfollow_user_path(@video.user), :class => "btn btn-primary follow-user", method: 'post', remote: true do
+                %i.fa.fa-users
+                Following
+            - else
+              = link_to follow_user_path(@video.user), :class => "btn btn-primary follow-user", method: 'post', remote: true do
+                %i.fa.fa-users
+                Follow
+          on
+          = l(@video.created_at, format: :add_video)
+        .stats.pull-right
+          .views.show-tooltip{:"data-toggle" => "tooltip", :"data-placement" => "left", title: "This video has been seen by #{@video.post_views.count} people"}
+            %i.fa.fa-eye.fa-3x
+          .views_count.show-tooltip{:"data-toggle" => "tooltip", :"data-placement" => "left", title: "This video has been seen by #{@video.post_views.count} people"}
+            = @video.post_views.count
+          .like
+            = link_to like_posts_video_path(@video), method: 'post', class: "show-tooltip", :"data-toggle" => "tooltip", :"data-placement" => "left", title: "Upvote this video", remote: true do
+              %i.fa.fa-thumbs-up.fa-3x
+          .like_count.show-tooltip{:"data-toggle" => "tooltip", :"data-placement" => "left", title: "This video has a reputation of #{@video.reputation}"}
+            = @video.reputation
+          .dislike
+            = link_to unlike_posts_video_path(@video), method: 'post', class: "show-tooltip", :"data-toggle" => "tooltip", :"data-placement" => "left", title: "Downvote this video", remote: true do
+              %i.fa.fa-thumbs-down.fa-3x
+          .favorite
+            - if current_user && @video.favorized_by?(current_user)
+              = link_to remove_from_favorites_posts_video_path(@video), :class => "favorite-post favorite show-tooltip", :"data-toggle" => "tooltip", :"data-placement" => "left", title: "This video is on your favorites list", method: 'post', remote: true do
+                %i.fa.fa-heart.fa-3x
+            - else
+              = link_to add_to_favorites_posts_video_path(@video), :class => "favorite-post show-tooltip", :"data-toggle" => "tooltip", :"data-placement" => "left", title: "Add to favorites", method: 'post', remote: true do
+                %i.fa.fa-heart.fa-3x
+      .video-container
+        %iframe{width: "620", height: "470", frameborder: "0", src: @video.video_embed_url}
+      .share-buttons.text-center
+        = render partial: "shared/share_buttons", locals: { video: @video }
+      
+      .navigation-buttons.text-center
+        %a.btn.btn-default.btn-lg.previous{href: "#"}
+          %i.fa.fa-chevron-left.fa-fw
+          Previous Video
+        %a.btn.btn-default.btn-lg{href: "#"}
+          %i.fa.fa-chevron-right.fa-fw
+          Next Video
+    .col-md-4
+      = render partial: "shared/small_post_pod", :collection => @related_videos.to_a.unshift(@video), :as => :video
+
+= content_for :scripts do
+  :javascript
+    (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=1411053429180123&version=v2.0";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+%h2 Did you like this video? Tell us what you think below.
+.fb-comments{:"data-href" => posts_video_url(@video), :"data-numposts" => "5", :"data-colorscheme" => "light", :"data-width" => "100%"}
