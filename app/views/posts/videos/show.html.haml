@@ -29,49 +29,39 @@
           on
           = l(@video.created_at, format: :add_video)
         .stats.pull-right
-          .views.show-tooltip{:"data-toggle" => "tooltip", :"data-placement" => "left", title: "This video has been seen by #{@video.post_views.count} people"}
+          .views{title: "This video has been seen by #{@video.post_views.count} people"}
             %i.fa.fa-eye.fa-3x
-          .views_count.show-tooltip{:"data-toggle" => "tooltip", :"data-placement" => "left", title: "This video has been seen by #{@video.post_views.count} people"}
+          .views_count{title: "This video has been seen by #{@video.post_views.count} people"}
             = @video.post_views.count
           .like
-            = link_to like_posts_video_path(@video), method: 'post', class: "show-tooltip", :"data-toggle" => "tooltip", :"data-placement" => "left", title: "Upvote this video", remote: true do
+            = link_to like_posts_video_path(@video), method: 'post', title: "Upvote this video", remote: true do
               %i.fa.fa-thumbs-up.fa-3x
-          .like_count.show-tooltip{:"data-toggle" => "tooltip", :"data-placement" => "left", title: "This video has a reputation of #{@video.reputation}"}
+          .like_count{title: "This video has a reputation of #{@video.reputation}"}
             = @video.reputation
           .dislike
-            = link_to unlike_posts_video_path(@video), method: 'post', class: "show-tooltip", :"data-toggle" => "tooltip", :"data-placement" => "left", title: "Downvote this video", remote: true do
+            = link_to unlike_posts_video_path(@video), method: 'post', title: "Downvote this video", remote: true do
               %i.fa.fa-thumbs-down.fa-3x
           .favorite
             - if current_user && @video.favorized_by?(current_user)
-              = link_to remove_from_favorites_posts_video_path(@video), :class => "favorite-post favorite show-tooltip", :"data-toggle" => "tooltip", :"data-placement" => "left", title: "This video is on your favorites list", method: 'post', remote: true do
+              = link_to remove_from_favorites_posts_video_path(@video), :class => "favorite-post favorite", title: "This video is on your favorites list", method: 'post', remote: true do
                 %i.fa.fa-heart.fa-3x
             - else
-              = link_to add_to_favorites_posts_video_path(@video), :class => "favorite-post show-tooltip", :"data-toggle" => "tooltip", :"data-placement" => "left", title: "Add to favorites", method: 'post', remote: true do
+              = link_to add_to_favorites_posts_video_path(@video), :class => "favorite-post", title: "Add to favorites", method: 'post', remote: true do
                 %i.fa.fa-heart.fa-3x
       .video-container
         %iframe{width: "620", height: "470", frameborder: "0", src: @video.video_embed_url}
       .share-buttons.text-center
         = render partial: "shared/share_buttons", locals: { video: @video }
       
-      .navigation-buttons.text-center
-        %a.btn.btn-default.btn-lg.previous{href: "#"}
-          %i.fa.fa-chevron-left.fa-fw
-          Previous Video
-        %a.btn.btn-default.btn-lg{href: "#"}
-          %i.fa.fa-chevron-right.fa-fw
-          Next Video
+      / .navigation-buttons.text-center
+      /   %a.btn.btn-default.btn-lg.previous{href: "#"}
+      /     %i.fa.fa-chevron-left.fa-fw
+      /     Previous Video
+      /   %a.btn.btn-default.btn-lg{href: "#"}
+      /     Next Video
+      /     %i.fa.fa-chevron-right.fa-fw
     .col-md-4
       = render partial: "shared/small_post_pod", :collection => @related_videos.to_a.unshift(@video), :as => :video
-
-= content_for :scripts do
-  :javascript
-    (function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=1411053429180123&version=v2.0";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
 
 %h2 Did you like this video? Tell us what you think below.
 .fb-comments{:"data-href" => posts_video_url(@video), :"data-numposts" => "5", :"data-colorscheme" => "light", :"data-width" => "100%"}

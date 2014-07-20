@@ -1,6 +1,6 @@
 = bootstrap_form_tag url: posts_videos_path, layout: :horizontal do |f|
   = f.text_field :title, value: '', placeholder: 'Leave blank to use youtube/vimeo title'
-  = f.text_area :description, value: '', placeholder: 'Leave blank to use youtube/vimeo description'
+  =# f.text_area :description, value: '', placeholder: 'Leave blank to use youtube/vimeo description'
   = f.url_field :video_url, value: '', required: "required", placeholder: 'Youtube or vimeo video url'
   = f.collection_select :category, Category.all, :id, :name, {prompt: "Select a category"}, required: "required"
   = f.form_group do

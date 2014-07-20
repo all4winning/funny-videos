@@ -5,6 +5,9 @@ class ApplicationController < ActionController::Base
 
   before_filter :categories
   before_filter :notifications
+  before_filter :trending_videos
+  before_filter :latest_videos
+  before_filter :popular_videos
 
   def authenticate_admin_user!
     redirect_to '/' and return if user_signed_in? && !current_user.admin?
@@ -29,5 +32,17 @@ class ApplicationController < ActionController::Base
     else
       @notifications_not_seen_count = 0
     end
+  end
+
+  def latest_videos
+    @latest_videos ||= Posts::Video.order(created_at: :desc).published.limit(3)
+  end
+  
+  def popular_videos
+    @popular_videos ||= Posts::Video.popular_videos.published.limit(3)
+  end
+
+  def trending_videos
+    @trending_videos ||= Posts::Video.trending_videos.published.limit(3)
   end
 end

@@ -64,14 +64,14 @@ class Post < ActiveRecord::Base
   end 
   
   def related_videos
-    related_videos = Posts::Video.select('COUNT(*) AS total, posts.*').
+    related_videos ||= Posts::Video.select('COUNT(*) AS total, posts.*').
                                   where('posts.id != ?', self.id).
                                   joins('LEFT OUTER JOIN post_views ON posts.id = post_views.post_id').
                                   joins(:categories).
                                   where("categories.id in (#{categories.pluck(:id).join(',')})").
                                   group('posts.id').
-                                  order('total DESC').published  
-  end 
+                                  order('total DESC, created_at DESC').published  
+  end
   
   def like(user_id)
     rep = Reputation.find_by_user_id_and_post_id(user_id, id)

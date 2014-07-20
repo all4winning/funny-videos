@@ -1,2 +1,20 @@
 .sidebar
-  = render partial: "shared/sidebar_post_pod", collection: Posts::Video.order("created_at desc").limit(10), as: :video
+  .facebook-like-widget
+    .title
+      Join our Facebook community
+    .fb-like-box{:"data-colorscheme" => "light", :"data-header" => "false", :"data-href" => "https://www.facebook.com/funslaves", :"data-show-border" => "false", :"data-show-faces" => "true", :"data-stream" => "false", :"data-width" => "100%"}
+  
+  .latest-videos
+    .title
+      Latest Videos
+    = render partial: "shared/sidebar_post_pod", collection: @latest_videos, as: :video
+
+  .trending-videos
+    .title
+      Trending Videos
+    = render partial: "shared/sidebar_post_pod", collection: @trending_videos, as: :video
+
+  .popular-videos
+    .title
+      Popular Videos
+    = render partial: "shared/sidebar_post_pod", collection: @popular_videos, as: :video
