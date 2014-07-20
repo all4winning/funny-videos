@@ -5,9 +5,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :categories
   before_filter :notifications
-  before_filter :trending_videos
-  before_filter :latest_videos
-  before_filter :popular_videos
+  before_filter :top_users
 
   def authenticate_admin_user!
     redirect_to '/' and return if user_signed_in? && !current_user.admin?
@@ -34,15 +32,11 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def latest_videos
-    @latest_videos ||= Posts::Video.order(created_at: :desc).published.limit(3)
-  end
-  
-  def popular_videos
-    @popular_videos ||= Posts::Video.popular_videos.published.limit(3)
-  end
-
-  def trending_videos
-    @trending_videos ||= Posts::Video.trending_videos.published.limit(3)
+  def top_users
+    if current_user
+      @top_users = User.top_users.not_followed_by(current_user.id).limit(5)
+    else
+      @top_users = User.top_users.limit(5)
+    end 
   end
 end

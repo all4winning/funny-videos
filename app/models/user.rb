@@ -13,6 +13,8 @@ class User < ActiveRecord::Base
   has_many :post_views
   has_many :favorites
   has_many :notifications, order: "created_at desc", class_name: "Notification"
+  has_many :followings, foreign_key: "follower_id", dependent: :destroy, class_name: 'Follow'
+  has_many :followers, foreign_key: 'followable_id', dependent: :destroy, class_name: 'Follow'
 
   has_attached_file :image, :default_url => "/images/users/:style/missing.png"
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
@@ -22,6 +24,14 @@ class User < ActiveRecord::Base
 
   acts_as_followable
   acts_as_follower
+
+  scope :top_users, order("posts_count desc")
+  
+  scope :not_followed_by, (lambda do |user_id|
+    where("users.id != :user_id AND users.id NOT IN (SELECT followable_id
+      FROM follows
+      WHERE follower_id = :user_id)", {:user_id => user_id})
+  end)
 
   after_create :add_interests
   after_create :add_notification_settings

@@ -1,0 +1,7 @@
+.row
+  .col-md-7
+    = link_to user.first_name, user_path(user)
+  .col-md-5
+    = link_to follow_user_path(user), :class => "btn btn-primary follow-user", method: 'post', remote: true do
+      %i.fa.fa-users
+      Follow
