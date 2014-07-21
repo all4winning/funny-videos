@@ -1,0 +1,10 @@
+%li{:class => notification_class(index)}
+  .row
+    .col-md-2
+      = image_tag notification.about.image.url
+    .col-md-10
+      %a{href: posts_video_path(notification.about)}
+        = notification.about.title
+      %span has been published
+      %br
+      = time_ago_in_words(notification.created_at)

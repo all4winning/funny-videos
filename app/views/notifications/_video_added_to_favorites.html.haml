@@ -1,0 +1,13 @@
+%li{:class => notification_class(index)}
+  .row
+    .col-md-2
+      = image_tag notification.user.image.url
+    .col-md-10
+      %a{href: user_path(notification.user)}
+        = notification.user.username
+      %span added your video
+      %a{href: posts_video_path(notification.about)}
+        = notification.about.title
+      %span to his favorites
+      %br
+      = time_ago_in_words(notification.created_at)

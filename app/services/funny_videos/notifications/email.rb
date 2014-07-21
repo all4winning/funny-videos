@@ -5,6 +5,10 @@ module FunnyVideos
       def self.newsletter(params)
         # TODO implement this
       end
+
+      def self.welcome(params)
+        # TODO implement this
+      end
     end
   end
 end

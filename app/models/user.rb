@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
 
   EDITABLE_NOTIFICATIONS = [:newsletter, :follow]
 
-  attr_accessible :image
+  attr_accessible :image, :fb_token, :fb_token_expires_at
   attr_readonly :post_views_count, :posts_count
   devise :omniauthable, :omniauth_providers => [:facebook]
 
@@ -41,10 +41,14 @@ class User < ActiveRecord::Base
       user.provider = auth.provider
       user.uid = auth.uid
       user.email = auth.info.email
-      user.first_name = auth.info.name   # assuming the user model has a name
+      user.first_name = auth.info.first_name
+      user.last_name = auth.info.last_name
       user.image = process_uri(auth.info.image) if auth.info.image.present?
       user.username = auth.info.name
       user.confirmed_at = Time.now if user.confirmed_at.nil?
+      user.last_seen_notifications = Time.now if user.last_seen_notifications.nil?
+      user.fb_token = auth.credentials.token
+      user.fb_token_expires_at = Time.at(auth.credentials.expires_at.to_i)
       user.save
     end
   end

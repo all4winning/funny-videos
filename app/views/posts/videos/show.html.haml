@@ -19,11 +19,11 @@
             %b= @video.user.first_name
           - if current_user && current_user != @video.user
             -if current_user.following?(@video.user) 
-              = link_to unfollow_user_path(@video.user), :class => "btn btn-primary follow-user", method: 'post', remote: true do
+              = link_to unfollow_user_path(@video.user), :class => "btn btn-primary follow-user follow-#{@video.user.id}", method: 'post', remote: true do
                 %i.fa.fa-users
                 Following
             - else
-              = link_to follow_user_path(@video.user), :class => "btn btn-primary follow-user", method: 'post', remote: true do
+              = link_to follow_user_path(@video.user), :class => "btn btn-primary follow-user follow-#{@video.user.id}", method: 'post', remote: true do
                 %i.fa.fa-users
                 Follow
           on
@@ -53,13 +53,15 @@
       .share-buttons.text-center
         = render partial: "shared/share_buttons", locals: { video: @video }
       
-      / .navigation-buttons.text-center
-      /   %a.btn.btn-default.btn-lg.previous{href: "#"}
-      /     %i.fa.fa-chevron-left.fa-fw
-      /     Previous Video
-      /   %a.btn.btn-default.btn-lg{href: "#"}
-      /     Next Video
-      /     %i.fa.fa-chevron-right.fa-fw
+      .navigation-buttons.text-center
+        - if @video.previous_video.present?
+          %a.btn.btn-default.btn-lg.previous{href: posts_video_url(@video.previous_video)}
+            %i.fa.fa-chevron-left.fa-fw
+            Previous Video
+        - if @video.next_video.present?
+          %a.btn.btn-default.btn-lg{href: posts_video_url(@video.next_video)}
+            Next Video
+            %i.fa.fa-chevron-right.fa-fw
     .col-md-4
       = render partial: "shared/small_post_pod", :collection => @related_videos.to_a.unshift(@video), :as => :video
 

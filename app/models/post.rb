@@ -62,6 +62,14 @@ class Post < ActiveRecord::Base
   def favorites_count
     favorites.count   
   end 
+
+  def next_video
+    Post.where("id > ?", self.id).order("id asc").first
+  end
+
+  def previous_video
+    Post.where("id < ?", self.id).order("id desc").first
+  end
   
   def related_videos
     related_videos ||= Posts::Video.select('COUNT(*) AS total, posts.*').

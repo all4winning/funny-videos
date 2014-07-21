@@ -34,6 +34,7 @@ gem 'whenever', :require => false
 gem 'select2-rails'
 gem 'activeadmin', github: 'gregbell/active_admin'
 gem 'meta_search'
+gem 'fb_graph'
 
 group :development do
   gem 'mailcatcher'

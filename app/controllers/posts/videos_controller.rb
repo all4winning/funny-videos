@@ -9,7 +9,7 @@ module Posts
     end
 
     def show
-      @related_videos = @video.related_videos.limit(4)                           
+      @related_videos = @video.related_videos.limit(5)                           
       FunnyVideos::Videos::AddPostViews.new(current_user, @video, request.remote_ip).perform
     end
 
@@ -34,6 +34,7 @@ module Posts
     
     def like
       @video.like(current_user.id)
+      FunnyVideos::Notifications::NotificationService.broadcast({type: :video_liked, user: current_user, about: @video})
     end
     
     def unlike
@@ -46,6 +47,7 @@ module Posts
     
     def add_to_favorites
       Favorite.find_or_create_by_user_id_and_post_id(current_user.id, @video.id)
+      FunnyVideos::Notifications::NotificationService.broadcast({type: :video_added_to_favorites, user: current_user, about: @video})
     end
     
     def remove_from_favorites

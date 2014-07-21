@@ -1,6 +1,2 @@
-- @notifications.each do |notification|
-  %li
-    %span Your video
-    %a{href: posts_video_path(notification.about)}
-      = notification.about.title
-    %span has been published
+- @notifications.each_with_index do |notification, index|
+  = render partial: "notifications/#{notification.notification_type}", locals: {notification: notification, index: index}
