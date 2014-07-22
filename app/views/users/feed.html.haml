@@ -1,3 +1,4 @@
-%h2 List of videos
-
-= render partial: "shared/post_pod", collection: @videos, as: :video
+.row
+  .panel_title
+    %h2 Top videos from people and interests you follow 
+  = render partial: "shared/post_pod", collection: @videos, as: :video

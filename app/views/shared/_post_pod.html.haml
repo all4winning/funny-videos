@@ -1,5 +1,10 @@
 .col-sm-6.col-md-4 
-  .home-video 
+  .home-video
+    %a{href: posts_video_path(video)}
+      .thumbnail
+        = image_tag video.image.url(:video)
+      .caption
+        %h3= video.title 
     .stats.clearfix 
       .pull-left
         %i.fa.fa-eye.fa-1x.views
@@ -9,11 +14,6 @@
         %i.fa.fa-users.fa-1x.favorites  
           = video.favorites_count
       .pull-right    
-        %i.fa.fa-user.fa-1x
+        %i.fa.fa-user.fa-1x.username
           = video.user.username 
-    %a{href: posts_video_path(video)}
-      .thumbnail
-        = image_tag video.image.url(:video)
-      .caption
-        %h3= video.title
          
