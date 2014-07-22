@@ -7,21 +7,54 @@
   .container-fluid
     .row
       .col-md-9
+        .panel_title
+          background-color: #373737
+          border-radius: 3px
+          color: #fff
+          display: block
+          margin-bottom: 20px
+          padding: 14px 18px
+          position: relative
+          
+          h2
+            color: #fff
+            font-size: 18px
+            font-weight: 600
+            margin-bottom: -3px
+            margin-top: 3px
+          
         .col-md-4:nth-child(3n+2)
           clear: left
-
-      .thumbnail
-        padding: 0px  
-        
-      .caption
-        padding: 0px 
-        margin-bottom: 40px
-        margin-top: -15px        
-        h3
-          font-size: 1.25em
-          font-weight: bold
-          color: black
           
-      .stats
-        .views, .reputation, .favorites
-          margin-right: 10px
+      .home-video
+        background-color: #fff
+        border-radius: 3px
+        box-shadow: 0 1px 2px rgba(0,0,0,0.15)
+        margin-bottom: 3%
+        margin-right: 2.96%
+        overflow: hidden
+        
+        .thumbnail
+          padding: 0px  
+          
+        .caption
+          padding: 0px 
+          margin-bottom: 40px
+          margin-top: -15px 
+            
+               
+          h3
+            font-size: 15px
+            padding: 10px 15px
+            font-weight: bold
+            color: black
+            margin-bottom: 10px
+            
+        .thumbnail:hover, .caption > h3:hover, .stats:hover
+          opacity: 0.6
+          transition: all 0.2s ease 0s 
+          color: red  
+            
+        .stats
+          .views, .reputation, .favorites
+            margin-right: 10px
