@@ -2,6 +2,8 @@ funny-videos
 ============
 LIKE/SHARE COUNTS:
 - facebook: http://stackoverflow.com/questions/9728279/getting-the-facebook-like-share-count-for-a-given-url
+- twitter: http://stackoverflow.com/questions/22802266/counting-twitter-retweets-followers-favorites
+- google+: http://stackoverflow.com/questions/24834384/how-to-get-the-google-post-share-count-not-the-plus-one-count
 
 
 Competition
