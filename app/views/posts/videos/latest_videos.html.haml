@@ -1,3 +1,4 @@
-%h2 Watch latest videos
-
-= render partial: "shared/post_pod", collection: @videos, as: :video
+.row
+  .panel_title
+    %h2 Latest Videos 
+  = render partial: "shared/post_pod", collection: @videos, as: :video

@@ -1,18 +1,19 @@
-.col-sm-6.col-md-4  
-  .stats.clearfix 
-    .pull-left
-      %i.fa.fa-eye.fa-1x.views
-        = video.post_views.count
-      %i.fa.fa-thumbs-up.fa-1x.reputation
-        = video.reputation
-      %i.fa.fa-users.fa-1x.favorites  
-        = video.favorites_count
-    .pull-right    
-      %i.fa.fa-user.fa-1x
-        = video.user.username 
-  %a{href: posts_video_path(video)}
-    .thumbnail
-      = image_tag video.image.url(:video)
-    .caption
-      %h3= video.title
+.col-sm-6.col-md-4 
+  .home-video
+    %a{href: posts_video_path(video)}
+      .thumbnail
+        = image_tag video.image.url(:video)
+      .caption
+        %h3= video.title 
+    .stats.clearfix 
+      .pull-left
+        %i.fa.fa-eye.fa-1x.views
+          = video.post_views.count
+        %i.fa.fa-thumbs-up.fa-1x.reputation
+          = video.reputation
+        %i.fa.fa-users.fa-1x.favorites  
+          = video.favorites_count
+      .pull-right    
+        %i.fa.fa-user.fa-1x.username
+          = video.user.username 
          

@@ -1,7 +1,9 @@
 .row
-  %h2 Top Videos From Yesterday  
+  .panel_title
+    %h2 Top Videos From Yesterday  
   = render partial: "shared/post_pod", collection: @top_videos, as: :video
 
 .row
-  %h2 Watch Latest Videos
+  .panel_title
+    %h2 Watch Latest Videos
   = render partial: "shared/post_pod", collection: @videos, as: :video

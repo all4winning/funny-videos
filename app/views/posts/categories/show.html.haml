@@ -1,3 +1,4 @@
-%h2 Watch videos 
-
-= render partial: "shared/post_pod", collection: @videos, as: :video
+.row
+  .panel_title
+    %h2 Watch videos from category #{params[:id]}
+  = render partial: "shared/post_pod", collection: @videos, as: :video
