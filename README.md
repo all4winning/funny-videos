@@ -1,5 +1,9 @@
 funny-videos
 ============
+LIKE/SHARE COUNTS:
+- facebook: http://stackoverflow.com/questions/9728279/getting-the-facebook-like-share-count-for-a-given-url
+- 
+
 
 Competition
 - http://www.tonto.ro/
