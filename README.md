@@ -7,6 +7,9 @@ LIKE/SHARE COUNTS:
 - model to arange data under video: http://themeforest.net/item/video-magazine-html-magazine-template/full_screen_preview/7687942
 
 
+Video pop up
+- http://stackoverflow.com/questions/12849742/how-do-i-have-a-popup-popover-appear-when-a-youtube-video-finishes
+
 Competition
 - http://www.tonto.ro/
 - http://www.filmsforaction.org
