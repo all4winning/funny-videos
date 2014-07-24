@@ -50,6 +50,34 @@
                 %i.fa.fa-heart.fa-3x
       .video-container
         %iframe{width: "620", height: "470", frameborder: "0", src: @video.video_embed_url}
+      .shadow
+      .row
+        .col-md-4.uploader
+          %figure
+            %a{href: "#"} 
+              %img{src: image_path('avatar.jpg')}
+          .aboutuploader
+            %h5
+              ="By "+@video.user.username
+            %time{datetime: @video.created_at}
+              ="uploaded: "+@video.created_at.strftime("%d %B %Y")
+            %a.btn.btn-primary.btn-xs.backcolor{href: "#"} 
+              = "Watch all videos" 
+        .col-md-4.stats
+          %hr.visible-xs
+          %ul
+            %li.likes
+              %h5
+                Likes
+              %h2
+                =@video.reputation
+            %li.views
+              %h5
+                Views
+              %h2
+                =@video.post_views.count    
+        .col-md-4.videoshare          
+          = render partial: "shared/share_buttons", locals: { video: @video }             
       .share-buttons.text-center
         = render partial: "shared/share_buttons", locals: { video: @video }
       
