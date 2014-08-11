@@ -1,2 +1,7 @@
-%h2 Videos uploaded by you!
-= render partial: "shared/post_pod", collection: @videos, as: :video
+.row
+  .panel_title
+    %h2 Videos you uploaded
+  = render partial: "shared/post_pod", collection: @videos, as: :video
+
+.row.text-center
+  = will_paginate @videos, renderer: BootstrapPagination::Rails

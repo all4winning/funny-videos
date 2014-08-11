@@ -5,5 +5,8 @@
 
 .row
   .panel_title
-    %h2 Watch Latest Videos
+    %h2 Latest Videos
   = render partial: "shared/post_pod", collection: @videos, as: :video
+
+.row.text-center
+  = will_paginate @videos, renderer: BootstrapPagination::Rails

@@ -1,4 +1,7 @@
 .row
   .panel_title
-    %h2 Watch videos from category #{params[:id]}
+    %h2 #{params[:id].capitalize} videos
   = render partial: "shared/post_pod", collection: @videos, as: :video
+
+.row.text-center
+  = will_paginate @videos, renderer: BootstrapPagination::Rails

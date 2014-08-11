@@ -4,4 +4,5 @@
       .thumbnail
         = image_tag video.image.url(:video)
   .col-md-7.video-title
-    = video.title
+    %a{href: posts_video_path(video)}
+      = video.title

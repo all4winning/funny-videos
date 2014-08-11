@@ -5,7 +5,7 @@ module Posts
 
 
     def index
-      @videos = Posts::Video.published
+      @videos = Posts::Video.published.paginate(:page => params[:page], :per_page => Rails.configuration.videos_per_page)
     end
 
     def show
@@ -42,7 +42,7 @@ module Posts
     end
     
     def search
-      @videos = Posts::Video.where('LOWER(title) LIKE ?', "%#{params[:query].downcase}%").published
+      @videos = Posts::Video.where('LOWER(title) LIKE ?', "%#{params[:query].downcase}%").published.paginate(:page => params[:page], :per_page => Rails.configuration.videos_per_page)
     end
     
     def add_to_favorites
@@ -56,15 +56,15 @@ module Posts
     end
     
     def latest_videos
-      @videos = Posts::Video.order(created_at: :desc).published
+      @videos = Posts::Video.order(created_at: :desc).published.paginate(:page => params[:page], :per_page => Rails.configuration.videos_per_page)
     end
     
     def popular_videos
-      @videos = Posts::Video.popular_videos.published
+      @videos = Posts::Video.popular_videos.published.paginate(:page => params[:page], :per_page => Rails.configuration.videos_per_page)
     end
 
     def trending_videos
-      @videos = Posts::Video.trending_videos.published
+      @videos = Posts::Video.trending_videos.published.paginate(:page => params[:page], :per_page => Rails.configuration.videos_per_page)
     end
 
     private 

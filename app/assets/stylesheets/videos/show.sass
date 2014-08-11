@@ -38,22 +38,46 @@
     width: 100%
     height: 100%
 
-  .video-player
-    padding-top: 20px
+  .related-videos
+    margin-top: 42px
 
-    .video-image
-      padding-right: 5px
+    .video-player
+      padding-top: 20px
 
-    .video-title
-      padding-left: 0px
+      .video-image
+        padding-right: 5px
 
-    &:hover
+      .video-title
+        padding-left: 0px
+
+        a
+          color: #373737
+
+        &:hover
+          color: #373737
+
+      &:hover
+        background: #373737
+        color: #ffffff
+        border-radius: 3px
+
+        a
+          color: #ffffff
+
+        &:hover
+          color: #ffffff
+
+    .playing
       background: #333333
       color: #ffffff
+      border-radius: 3px
 
-  .playing
-    background: #333333
-    color: #ffffff
+      .video-title
+        a
+          color: #ffffff
+
+        &:hover
+          color: #ffffff
 
   .share-buttons
     margin-top: 20px

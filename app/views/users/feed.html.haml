@@ -1,4 +1,7 @@
 .row
   .panel_title
-    %h2 Top videos from people and interests you follow 
+    %h2 Videos recommanded for you
   = render partial: "shared/post_pod", collection: @videos, as: :video
+
+.row.text-center
+  = will_paginate @videos, renderer: BootstrapPagination::Rails

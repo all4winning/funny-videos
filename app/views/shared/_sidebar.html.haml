@@ -3,8 +3,9 @@
     .title
       Join our Facebook community
     .fb-like-box{:"data-colorscheme" => "light", :"data-header" => "false", :"data-href" => "https://www.facebook.com/funslaves", :"data-show-border" => "false", :"data-show-faces" => "true", :"data-stream" => "false", :"data-width" => "100%"}
-  
-  .top-users
-    .title
-      Top users to follow
-    = render partial: "shared/users_to_follow", collection: @top_users, as: :user
+
+  - if !@top_users.empty?
+    .top-users
+      .title
+        Top users to follow
+      = render partial: "shared/users_to_follow", collection: @top_users, as: :user

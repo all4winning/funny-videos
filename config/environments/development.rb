@@ -39,6 +39,7 @@ FunnyVideos::Application.configure do
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = { :address => "localhost", :port => 1025 }
 
-  config.facebook_app_id = "1411053429180123"
-  config.facebook_app_secret = "dddca8df00af3a5e47afcbe58d4376a5"
+  config.facebook_app_id = "1454940514791414"
+  config.facebook_app_secret = "1df34f5fea9ddb70a6433db8339db957"
+  config.videos_per_page = 1
 end

@@ -63,7 +63,8 @@
             Next Video
             %i.fa.fa-chevron-right.fa-fw
     .col-md-4
-      = render partial: "shared/small_post_pod", :collection => @related_videos.to_a.unshift(@video), :as => :video
+      .related-videos
+        = render partial: "shared/small_post_pod", :collection => @related_videos.to_a.unshift(@video), :as => :video
 
 %h2 Did you like this video? Tell us what you think below.
 .fb-comments{:"data-href" => posts_video_url(@video), :"data-numposts" => "5", :"data-colorscheme" => "light", :"data-width" => "100%"}

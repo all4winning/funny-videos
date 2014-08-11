@@ -12,17 +12,17 @@
       / Collect the nav links, forms, and other content for toggling
       #bs-example-navbar-collapse-1.collapse.navbar-collapse
         %ul.nav.navbar-nav
-          %li.active
+          %li{class: active_menu_item(params[:controller], "home")}
             %a{href: root_path} 
               %i.fa.fa-home.fa-fw
               Home
-          %li
+          %li{class: active_menu_item(params[:action], "latest_videos")}
             %a{href: latest_videos_posts_videos_path} Latest   
-          %li
+          %li{class: active_menu_item(params[:action], "popular_videos")}
             %a{href: popular_videos_posts_videos_path} Popular
-          %li
+          %li{class: active_menu_item(params[:action], "trending_videos")}
             %a{href: trending_videos_posts_videos_path} Trending
-          %li.dropdown
+          %li.dropdown{class: active_menu_item(params[:controller], "posts/categories")}
             %a.dropdown-toggle{href: "#", :"data-toggle" => "dropdown"}
               Categories
               %b.caret
@@ -58,10 +58,14 @@
                     %i.fa.fa-user.fa-fw
                     Administration
                 %li
+                  %a{href: feed_users_path}
+                    %i.fa.fa-home.fa-fw
+                    Recommanded for you
+                %li
                   %a{href: my_videos_user_path(current_user)}
                     %i.fa.fa-video-camera.fa-fw
                     My Videos
-                %li
+                -#%li
                   %a{href: user_interests_path(current_user)}
                     %i.fa.fa-eye.fa-fw
                     Interests
@@ -69,7 +73,7 @@
                   %a{href: favorites_user_path(current_user)}
                     %i.fa.fa-heart.fa-fw
                     Favorites
-                %li
+                -#%li
                   %a{href: user_notification_settings_path(current_user)}
                     %i.fa.fa-cog.fa-fw
                     Privacy Settings
