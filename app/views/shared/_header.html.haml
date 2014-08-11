@@ -53,14 +53,14 @@
               %a.btn.btn-primary.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
                 %span.fa.fa-caret-down
               %ul.dropdown-menu
-                %li
+                -#%li
                   %a{href: admin_root_path}
                     %i.fa.fa-user.fa-fw
                     Administration
                 %li
                   %a{href: feed_users_path}
                     %i.fa.fa-home.fa-fw
-                    Recommanded for you
+                    Recommanded
                 %li
                   %a{href: my_videos_user_path(current_user)}
                     %i.fa.fa-video-camera.fa-fw
