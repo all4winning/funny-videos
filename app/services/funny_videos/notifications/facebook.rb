@@ -27,7 +27,7 @@ module FunnyVideos
         end
       end
 
-      def self.post_to_facebook(type, params)
+      def self.post_to_facebook(params)
         ::PostToFacebookWorker.perform_async(
           facebook_message(params[:type]),
           params[:user].fb_token,
