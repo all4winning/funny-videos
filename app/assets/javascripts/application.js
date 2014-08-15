@@ -20,4 +20,3 @@
 //= require bootstrap
 //= require header
 //= require home
-//= require analytics
