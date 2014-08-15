@@ -19,4 +19,5 @@
 
 //= require bootstrap
 //= require header
+//= require analytics
 //= require home
