@@ -79,7 +79,7 @@ FunnyVideos::Application.configure do
   config.log_formatter = ::Logger::Formatter.new
 
   # Do not dump schema after migrations.
-  config.active_record.dump_schema_after_migration = false
+  #config.active_record.dump_schema_after_migration = false
   config.facebook_app_id = "1411053429180123"
   config.facebook_app_secret = "dddca8df00af3a5e47afcbe58d4376a5"
   config.videos_per_page = 12

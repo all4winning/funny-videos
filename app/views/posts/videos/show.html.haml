@@ -49,7 +49,7 @@
               = link_to add_to_favorites_posts_video_path(@video), :class => "favorite-post", title: "Add to favorites", method: 'post', remote: true do
                 %i.fa.fa-heart.fa-3x
       .video-container
-        %iframe{width: "620", height: "470", frameborder: "0", src: @video.video_embed_url}
+        %iframe{width: "620", height: "470", type: "text/html", frameborder: "0", src: @video.video_embed_url}
       .share-buttons.text-center
         = render partial: "shared/share_buttons", locals: { video: @video }
       
