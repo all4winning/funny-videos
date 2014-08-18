@@ -20,4 +20,5 @@
 //= require bootstrap
 //= require header
 //= require analytics
+//= require youtube_player
 //= require home

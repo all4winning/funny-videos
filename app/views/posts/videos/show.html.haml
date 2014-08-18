@@ -49,7 +49,14 @@
               = link_to add_to_favorites_posts_video_path(@video), :class => "favorite-post", title: "Add to favorites", method: 'post', remote: true do
                 %i.fa.fa-heart.fa-3x
       .video-container
-        %iframe{width: "620", height: "470", class: "youtube-player", type: "text/html", frameborder: "0", src: @video.video_embed_url}
+        
+        %div{id: "player", :data => {:id => @video.video_id}}
+      - if not user_signed_in?    
+        .video-facebook_connect
+          .btn-group#facebook_login
+            %a.btn.btn-primary.btn-lg.facebook{href: user_omniauth_authorize_path(:facebook)}
+              %i.fa.fa-facebook.fa-1x
+              Connect with Facebook
       .share-buttons.text-center
         = render partial: "shared/share_buttons", locals: { video: @video }
       
