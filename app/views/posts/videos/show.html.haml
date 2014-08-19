@@ -73,6 +73,9 @@
       .share-buttons.text-center
         = render partial: "shared/share_buttons", locals: { video: @video }
       
+    .col-md-4
+      .related-videos
+        = render partial: "shared/small_post_pod", :collection => @related_videos.to_a.unshift(@video), :as => :video
       .navigation-buttons.text-center
         - if @video.previous_video.present?
           %a.btn.btn-default.btn-lg.previous{href: posts_video_url(@video.previous_video)}
@@ -82,9 +85,10 @@
           %a.btn.btn-default.btn-lg{href: posts_video_url(@video.next_video)}
             Next Video
             %i.fa.fa-chevron-right.fa-fw
-    .col-md-4
-      .related-videos
-        = render partial: "shared/small_post_pod", :collection => @related_videos.to_a.unshift(@video), :as => :video
-
+.row
+  .panel_title
+    %h2 Most Popular Videos  
+  = render partial: "shared/post_pod", collection: @popular_videos, as: :video
+  
 %h2 Did you like this video? Tell us what you think below.
 .fb-comments{:"data-href" => posts_video_url(@video), :"data-numposts" => "5", :"data-colorscheme" => "light", :"data-width" => "100%"}
