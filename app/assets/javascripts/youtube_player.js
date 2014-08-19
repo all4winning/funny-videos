@@ -33,7 +33,6 @@
       // when video ends
         function onPlayerStateChange(event) {        
             if(event.data === 0) {          
-                alert('done');
                 $("iframe").hide();
                 $(".videomessage").show();
                 $(".video-facebook_connect").hide();
