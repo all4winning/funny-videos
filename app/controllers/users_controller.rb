@@ -14,7 +14,7 @@ class UsersController < ApplicationController
                            joins('INNER JOIN categories_posts on posts.id=categories_posts.post_id').
                            joins('LEFT OUTER JOIN interests ON categories_posts.category_id = interests.category_id').
                            where('(follows.follower_id=?)OR(interests.selected=TRUE and interests.user_id=?)', current_user.id, current_user.id).
-                           published.paginate(:page => params[:page], :per_page => Rails.configuration.videos_per_page)
+                           published.distinct.paginate(:page => params[:page], :per_page => Rails.configuration.videos_per_page)
   end
   
   def my_videos
