@@ -1,6 +1,8 @@
 Server- web
 sidekiq command: bundle exec sidekiq -d -L log/sidekiq.log -C config/sidekiq.yml -q high,5 default -e production
 
+Assets precompile:
+RAILS_ENV=production bundle exec rake assets:precompile
 
 funny-videos
 ============
