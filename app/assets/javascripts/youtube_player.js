@@ -16,7 +16,7 @@
           videoId: id,
           events: {
             //'onReady': onPlayerReady,
-            //'onStateChange': onPlayerStateChange
+            'onStateChange': onPlayerStateChange
           }
         });
       }
@@ -31,11 +31,14 @@
       //    the player should play for six seconds and then stop.
       var done = false;
       // when video ends
-  //      function onPlayerStateChange(event) {        
-  //          if(event.data === 0) {          
-  //              alert('done');
-  //          }
-  //      }
+        function onPlayerStateChange(event) {        
+            if(event.data === 0) {          
+                alert('done');
+                $("iframe").hide();
+                $(".videomessage").show();
+                $(".video-facebook_connect").hide();
+            }
+        }
   //    function stopVideo() {
   //      player.stopVideo();
   //    }

@@ -51,6 +51,19 @@
       .video-container
         
         %div{id: "player", :data => {:id => @video.video_id}}
+        .videomessage.col-md-10.col-md-offset-1
+          - if not user_signed_in?   
+            .header
+              %h1 Create an account 
+            .btn-group#facebook_login
+              %a.btn.btn-primary.btn-lg.facebook{href: user_omniauth_authorize_path(:facebook)}
+                %i.fa.fa-facebook.fa-1x
+                Connect with Facebook
+            %h3 Press "Connect with Facebook" to be a member of this comunity!
+            %br %br      
+          %h1 Share with friends
+          .share-buttons.text-center
+            = render partial: "shared/share_buttons", locals: { video: @video }
       - if not user_signed_in?    
         .video-facebook_connect
           .btn-group#facebook_login
