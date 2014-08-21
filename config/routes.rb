@@ -16,6 +16,8 @@ Rails.application.routes.draw do
         get :latest_videos
         get :popular_videos
         get :trending_videos
+        post :video_counter
+        post :clicks
       end
       member do
         post :like

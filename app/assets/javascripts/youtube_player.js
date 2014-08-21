@@ -36,6 +36,27 @@
                 $("iframe").hide();
                 $(".videomessage").show();
                 $(".video-facebook_connect").hide();
+                
+                
+                $.ajax({
+			        type: "POST",
+			        url: "/posts/videos/video_counter",
+			        cache: false,
+			        success: function(data) {
+			        	console.log("succ");
+			          }
+			    });
+			    
+			    $(".fclick").on("click", function(){
+			    	$.ajax({
+			        type: "POST",
+			        url: "/posts/videos/clicks",
+			        cache: false,
+			        success: function(data) {
+			        	console.log("succ");
+			          }
+			    });
+			   });
             }
         }
   //    function stopVideo() {

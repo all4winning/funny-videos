@@ -17,6 +17,3 @@
 .rvmrc
 /public/system/*
 .project
-
-# Ignore csv files
-*.csv

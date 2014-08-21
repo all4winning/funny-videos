@@ -1,6 +1,6 @@
 module Posts
   class VideosController < ApplicationController
-    before_filter :authenticate_user!, :except => [:show, :search, :latest_videos, :popular_videos, :trending_videos]
+    before_filter :authenticate_user!, :except => [:show, :search, :latest_videos, :popular_videos, :trending_videos, :video_counter, :clicks]
     before_filter :load_video, only: [:show, :destroy, :like, :unlike, :add_to_favorites, :remove_from_favorites]
 
 
@@ -66,6 +66,45 @@ module Posts
 
     def trending_videos
       @videos = Posts::Video.trending_videos.published.paginate(:page => params[:page], :per_page => Rails.configuration.videos_per_page)
+    end
+    
+    def video_counter
+      require "csv"
+      data = {}
+      path = Rails.root.to_s + "/counter.csv"
+      begin
+        CSV.foreach(path) do |row|
+          name, value = row
+          data[name] = value
+        end
+        data['views'] = data['views'].to_i + 1
+      rescue
+        data['views'] = 1
+      end  
+      CSV.open(path, "wb") do |csv|
+        csv << ["views", data['views']]       
+      end
+      
+      render nothing: true
+    end
+    
+    def clicks
+      require "csv"
+      data = {}
+      path = Rails.root.to_s + "/clicks.csv"
+      begin
+        CSV.foreach(path) do |row|
+          name, value = row
+          data[name] = value
+        end
+        data['clicks'] = data['clicks'].to_i + 1
+      rescue
+        data['clicks'] = 1  
+      end  
+      CSV.open(path, "wb") do |csv|
+        csv << ["clicks", data['clicks']]       
+      end     
+      render nothing: true
     end
 
     private 
