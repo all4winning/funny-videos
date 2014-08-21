@@ -4,6 +4,10 @@ sidekiq command: bundle exec sidekiq -d -L log/sidekiq.log -C config/sidekiq.yml
 Assets precompile:
 RAILS_ENV=production bundle exec rake assets:precompile
 
+Enter export PATH=$PWD/bin:$PATH and press Enter.
+Enter export GEM_HOME=$PWD/gems and press Enter.
+Enter export RUBYLIB=$PWD/lib and press Enter
+
 funny-videos
 ============
 LIKE/SHARE COUNTS:
