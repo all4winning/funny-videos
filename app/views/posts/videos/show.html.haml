@@ -48,22 +48,9 @@
             - else
               = link_to add_to_favorites_posts_video_path(@video), :class => "favorite-post", title: "Add to favorites", method: 'post', remote: true do
                 %i.fa.fa-heart.fa-3x
-      .video-container
-        
-        %div{id: "player", :data => {:id => @video.video_id}}
-        .videomessage.col-md-10.col-md-offset-1
-          - if not user_signed_in?   
-            .header
-              %h1 Create an account 
-            .btn-group#facebook_login
-              %a.btn.btn-primary.btn-lg.fclick.facebook{href: user_omniauth_authorize_path(:facebook)}
-                %i.fa.fa-facebook.fa-1x
-                Connect with Facebook
-            %h3 Press "Connect with Facebook" to be a member of this comunity!
-            %br %br      
-          %h1 Share with friends
-          .share-buttons.text-center
-            = render partial: "shared/share_buttons", locals: { video: @video }
+      .video-container       
+        %div{id: "player", :data => {:id => @video.video_id, :image => @video.image.url(:video)}}
+        = render partial: "shared/end_video_message", locals: { video: @video }
       - if not user_signed_in?    
         .video-facebook_connect
           .btn-group#facebook_login

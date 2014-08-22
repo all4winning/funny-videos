@@ -1,0 +1,38 @@
+.videomessage.col-md-10.col-md-offset-1 
+    
+  .btn-group.text-center#facebook_login
+    .row
+      .btn.btn-success.btn-lg
+        = link_to like_posts_video_path(@video), method: 'post', title: "Upvote this video", remote: true do
+          %i.fa.fa-thumbs-up.fa-1x.white
+            Like
+      - if not user_signed_in?       
+        %a.btn.btn-primary.btn-lg.fclick.facebook{href: user_omniauth_authorize_path(:facebook)}
+          %i.fa.fa-facebook.fa-1x
+          Connect with Facebook
+      .btn.btn-success.btn-lg.fav
+        - if current_user && @video.favorized_by?(current_user)
+          = link_to remove_from_favorites_posts_video_path(@video), :class => "favorite-post favorite", title: "This video is on your favorites list", method: 'post', remote: true do
+            %i.fa.fa-heart.fa-1x.white
+              %span
+                Remove From Favorites
+        - else
+          = link_to add_to_favorites_posts_video_path(@video), :class => "favorite-post", title: "Add to favorites", method: 'post', remote: true do
+            %i.fa.fa-heart.fa-1x.red
+              %span
+                Add To Favorites 
+  .row.text-center  
+    .btn.btn-primary.btn-lg.replay
+      Replay Video    
+  .share-buttons.text-center
+    .row
+      %a.btn.btn-primary.btn-lg{href: "https://www.facebook.com/dialog/share?app_id=#{Rails.configuration.facebook_app_id}&display=popup&href=#{posts_video_url(video)}&redirect_uri=#{posts_video_url(video)}"}
+        %i.fa.fa-facebook.fa-fw
+        Share on Facebook
+      %a.btn.btn-success.btn-lg{href: "http://twitter.com/intent/tweet?source=sharethiscom&text=#{video.title}&url=#{posts_video_url(video)}"}
+        %i.fa.fa-twitter.fa-fw
+        Share on Twitter
+    .row.top_margin    
+      %a.btn.btn-danger.btn-lg{href: "https://plus.google.com/share?url=#{posts_video_url(video)}"}
+        %i.fa.fa-google-plus.fa-fw
+        Share on GooglePlus
