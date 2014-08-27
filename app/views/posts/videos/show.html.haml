@@ -57,6 +57,11 @@
             %a.btn.btn-primary.btn-lg.facebook{href: user_omniauth_authorize_path(:facebook)}
               %i.fa.fa-facebook.fa-1x
               Connect with Facebook
+      %button{id: "popup_window", :data => {:popup => "#example-popup"}}
+        Open The Light Weight Popup Modal
+      %button{class:"btn btn-primary btn-lg", :data => {:toggle => "modal", :target =>"#video-modal"}}
+        Launch demo modal
+      = render partial: "shared/video_popup"
       .share-buttons.text-center
         = render partial: "shared/share_buttons", locals: { video: @video }
       

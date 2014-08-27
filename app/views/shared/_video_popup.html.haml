@@ -1,0 +1,27 @@
+- if not user_signed_in?
+  #video-modal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", role: "dialog", tabindex: "-1"}
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button.close{"data-dismiss" => "modal", type: "button"}
+            %span{"aria-hidden" => "true"} ×
+            %span.sr-only Close
+          %h4#myModalLabel.modal-title Join FunSlave and enjoy the funniest videos from the net
+        .modal-body
+          .row
+            .col-md-12
+              %h3.title.text-center
+                Why should I join?
+              %ul
+                %li Upload videos
+                %li Add videos to favorites, to rewatch later
+                %li Connect with friends and receive notifications
+                %li Win prizes
+                %li Start making lists
+                %li Be part of a great comunity
+          .row
+            .col-md-12.text-center
+              .btn-group#facebook_login.text-center
+                %a.btn.btn-primary.facebook{href: user_omniauth_authorize_path(:facebook)}
+                  %i.fa.fa-facebook.fa-fw
+                  Connect with Facebook  

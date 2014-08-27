@@ -23,7 +23,8 @@ function onYouTubeIframeAPIReady() {
   //    the player should play for six seconds and then stop.
   // when video ends
 function onPlayerStateChange(event) {        
-    if(event.data === 0) {   
+    if(event.data === 0) { 
+    	$('#video-modal').modal('show');  
     	var imageUrl = $("#player").data("image");
 		$(".video-container").css({'background-image': 'url(' + imageUrl + ')',
 					'background-repeat': 'no-repeat',
@@ -54,3 +55,4 @@ function onPlayerStateChange(event) {
 					   });
 		            }
 		        };
+		        
