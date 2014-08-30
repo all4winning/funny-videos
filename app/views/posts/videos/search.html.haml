@@ -1,6 +1,7 @@
-%h2 Videos for: #{params[:query]}
-
-= render partial: "shared/post_pod", collection: @videos, as: :video
+.row
+  .panel_title
+    %h2 Videos for: #{params[:query]}
+  = render partial: "shared/post_pod", collection: @videos, as: :video
 
 .row.text-center
   = will_paginate @videos, renderer: BootstrapPagination::Rails

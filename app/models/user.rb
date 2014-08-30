@@ -61,6 +61,10 @@ class User < ActiveRecord::Base
     notification_settings[type][notification]
   end
 
+  def name
+    "#{first_name} #{last_name}"
+  end
+
   private
 
   def self.process_uri(uri)

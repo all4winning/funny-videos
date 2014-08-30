@@ -13,43 +13,50 @@
   .row
     .col-md-8
       .details.clearfix
-        .author.pull-left
-          Posted by
-          %a{href: user_path(@video.user)}
-            %b= @video.user.first_name
-          - if current_user && current_user != @video.user
-            -if current_user.following?(@video.user) 
-              = link_to unfollow_user_path(@video.user), :class => "btn btn-primary follow-user follow-#{@video.user.id}", method: 'post', remote: true do
-                %i.fa.fa-users
-                Following
-            - else
-              = link_to follow_user_path(@video.user), :class => "btn btn-primary follow-user follow-#{@video.user.id}", method: 'post', remote: true do
-                %i.fa.fa-users
-                Follow
-          on
-          = l(@video.created_at, format: :add_video)
-        .stats.pull-right
-          .views{title: "This video has been seen by #{@video.post_views.count} people"}
-            %i.fa.fa-eye.fa-3x
-          .views_count{title: "This video has been seen by #{@video.post_views.count} people"}
-            = @video.post_views.count
-          .like
-            = link_to like_posts_video_path(@video), method: 'post', title: "Upvote this video", remote: true do
-              %i.fa.fa-thumbs-up.fa-3x
-          .like_count{title: "This video has a reputation of #{@video.reputation}"}
-            = @video.reputation
-          .dislike
-            = link_to unlike_posts_video_path(@video), method: 'post', title: "Downvote this video", remote: true do
-              %i.fa.fa-thumbs-down.fa-3x
-          .favorite
-            - if current_user && @video.favorized_by?(current_user)
-              = link_to remove_from_favorites_posts_video_path(@video), :class => "favorite-post favorite", title: "This video is on your favorites list", method: 'post', remote: true do
-                %i.fa.fa-heart.fa-3x
-            - else
-              = link_to add_to_favorites_posts_video_path(@video), :class => "favorite-post", title: "Add to favorites", method: 'post', remote: true do
-                %i.fa.fa-heart.fa-3x
+        .row
+          .col-md-6
+            .author.pull-left
+              .row
+                .col-md-12
+                  .author-name
+                    Posted by
+                    %a{href: user_path(@video.user)}
+                      %b= @video.user.name
+                    - if current_user && current_user != @video.user
+                      -if current_user.following?(@video.user) 
+                        = link_to unfollow_user_path(@video.user), :class => "btn btn-primary follow-user follow-#{@video.user.id}", method: 'post', remote: true do
+                          %i.fa.fa-users
+                          Following
+                      - else
+                        = link_to follow_user_path(@video.user), :class => "btn btn-primary follow-user follow-#{@video.user.id}", method: 'post', remote: true do
+                          %i.fa.fa-users
+                          Follow
+                .col-md-12
+                  %i.fa.fa-calendar
+                  = l(@video.created_at, format: :add_video)
+          .col-md-6
+            .stats.pull-right
+              .views{title: "This video has been seen by #{@video.post_views.count} people"}
+                %i.fa.fa-eye.fa-3x
+              .views_count{title: "This video has been seen by #{@video.post_views.count} people"}
+                = @video.post_views.count
+              .like
+                = link_to like_posts_video_path(@video), method: 'post', title: "Upvote this video", remote: true do
+                  %i.fa.fa-thumbs-up.fa-3x
+              .like_count{title: "This video has a reputation of #{@video.reputation}"}
+                = @video.reputation
+              .dislike
+                = link_to unlike_posts_video_path(@video), method: 'post', title: "Downvote this video", remote: true do
+                  %i.fa.fa-thumbs-down.fa-3x
+              .favorite
+                - if current_user && @video.favorized_by?(current_user)
+                  = link_to remove_from_favorites_posts_video_path(@video), :class => "favorite-post favorite", title: "This video is on your favorites list", method: 'post', remote: true do
+                    %i.fa.fa-heart.fa-3x
+                - else
+                  = link_to add_to_favorites_posts_video_path(@video), :class => "favorite-post", title: "Add to favorites", method: 'post', remote: true do
+                    %i.fa.fa-heart.fa-3x
       .video-container       
-        %div{id: "player", :data => {:id => @video.video_id, :image => @video.image.url(:video)}}
+        %div{id: "player", :data => {:id => @video.video_id, :image => @video.image.url}}
         = render partial: "shared/end_video_message", locals: { video: @video }
       - if not user_signed_in?    
         .video-facebook_connect
@@ -57,10 +64,6 @@
             %a.btn.btn-primary.btn-lg.facebook{href: user_omniauth_authorize_path(:facebook)}
               %i.fa.fa-facebook.fa-1x
               Connect with Facebook
-      %button{id: "popup_window", :data => {:popup => "#example-popup"}}
-        Open The Light Weight Popup Modal
-      %button{class:"btn btn-primary btn-lg", :data => {:toggle => "modal", :target =>"#video-modal"}}
-        Launch demo modal
       = render partial: "shared/video_popup"
       .share-buttons.text-center
         = render partial: "shared/share_buttons", locals: { video: @video }

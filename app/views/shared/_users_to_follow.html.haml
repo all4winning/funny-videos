@@ -2,7 +2,7 @@
   .col-md-3.image
     = image_tag(user.image.url)
   .col-md-4.name
-    = link_to user.first_name, user_path(user)
+    = link_to user.name, user_path(user)
   .col-md-5.follow-button
     = link_to follow_user_path(user), :class => "btn btn-primary follow-user follow-#{user.id}", method: 'post', remote: true do
       %i.fa.fa-users

@@ -1,0 +1,12 @@
+.row
+  .panel_title
+    %h2 
+      - if @videos.count > 0
+        Videos uploaded by
+      - else
+        There are no videos uploaded by
+      = @user.name
+  = render partial: "shared/post_pod", collection: @videos, as: :video
+
+.row.text-center
+  = will_paginate @videos, renderer: BootstrapPagination::Rails

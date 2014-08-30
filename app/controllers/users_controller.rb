@@ -7,6 +7,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @videos = Posts::Video.where('posts.user_id =?', @user.id).published.paginate(:page => params[:page], :per_page => Rails.configuration.videos_per_page)
   end
   
   def feed

@@ -3,7 +3,7 @@
   .row
     .col-md-12
       = yield(:video)
-  .row
+  .row.under-video-content
     .col-md-9
       = content_for?(:content) ? yield(:content) : yield
     .col-md-3
